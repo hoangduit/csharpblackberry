@@ -1,0 +1,11 @@
+= Introduction =
+
+We're looking for contributors to assist in development of the following components:
+
+* Port more Blackberry APIs over to C#.
+* Work on the C# to Java translator application
+* Write Visual Studio.Net 2008 IDE add-on
+* Write Visual Studio.Net 2010 IDE add-on
+
+Please contact the owner (Lennie De Villiers) if you wish to contribute.
+Require Visual Studio.Net 2008/2010 with C#.
