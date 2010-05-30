@@ -8,4 +8,6 @@ We're looking for contributors to assist in development of the following compone
 - Write Visual Studio.Net 2010 IDE add-on <br>
 
 Please contact the owner (Lennie De Villiers) if you wish to contribute.
-Require Visual Studio.Net 2008/2010 with C#.
+Require Visual C# 2010 Express Edition.
+
+Contact: lenniedg@gmail.com
