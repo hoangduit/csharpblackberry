@@ -14,16 +14,13 @@ namespace CS4BB
         private bool displayProgress;
         private List<String> errors = new List<String>();
         private string directoryName;
+        private bool writeJavaCode;
 
         public Generator(SourceCode sourceCode)
         {
             this.sourceCode = sourceCode;
-        }
-
-        public Generator(SourceCode sourceCode, bool aDisplayProgress)
-        {
-            this.sourceCode = sourceCode;
-            this.displayProgress = aDisplayProgress;
+            this.displayProgress = false;
+            this.writeJavaCode = false;
         }
 
         public Generator(string aDirectoryName, SourceCode aSourceCode, bool aDisplayProgress)
@@ -31,6 +28,7 @@ namespace CS4BB
             this.directoryName = aDirectoryName;
             this.sourceCode = aSourceCode;
             this.displayProgress = aDisplayProgress;
+            this.writeJavaCode = true;
         }
         
         /// <summary>
@@ -50,8 +48,13 @@ namespace CS4BB
             if (displayProgress)
                 Console.WriteLine("Start pre-validation... File: {0}", this.sourceCode.GetFileName());
 
-            IValidate onlyOneClass = new OnlySingleClassPerFile();
+            IValidate onlyOneClass = new OnlySingleClassAndInterfacePerFile();
             String result = onlyOneClass.DoValidation(this.sourceCode);
+            if (result != null) errors.Add(result);
+
+            result = null;
+            IValidate noIndexers = new NoCSharpIndexers();
+            result = noIndexers.DoValidation(this.sourceCode);
             if (result != null) errors.Add(result);
         }
 
@@ -92,8 +95,9 @@ namespace CS4BB
                 if (!currentLineResult.Success)
                     this.errors.Add(currentLineResult.ErrorMessage);
 
-                if (currentLineResult.IsValidCode())
+                if (writeJavaCode && currentLineResult.IsValidCode())
                     WriteJavaLine(currentLineResult);
+
                 pos++;
             }
         }
