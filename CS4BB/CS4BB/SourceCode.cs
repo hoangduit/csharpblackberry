@@ -159,5 +159,23 @@ namespace CS4BB
 
             return result;
         }
+
+        /// <summary>
+        /// Count how many times a token is found in a string
+        /// </summary>
+        /// <param name="aCurrentCodeLine"></param>
+        /// <param name="aSearchChar"></param>
+        /// <returns></returns>
+        public int CountTokens(string aCurrentCodeLine, char aSearchChar)
+        {
+            int result = 0;
+            char[] ch = aCurrentCodeLine.ToCharArray();
+            for (int i = 0; i < ch.Length; i++)
+            {
+                if (ch[i].CompareTo(aSearchChar) == 0)
+                result++;
+            }
+            return result;
+        }
     }
 }

@@ -82,6 +82,7 @@
     <Compile Include="lang\CloseStatementBlockComp.cs" />
     <Compile Include="lang\ICommand.cs" />
     <Compile Include="lang\MainMethodComp.cs" />
+    <Compile Include="lang\MethodDefinitionComp.cs" />
     <Compile Include="lang\NamespaceComp.cs" />
     <Compile Include="lang\OpenStatementBlockComp.cs" />
     <Compile Include="lang\UsingCompDirective.cs" />
