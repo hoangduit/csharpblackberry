@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Reflection;
 using System.IO;
+using CS4BB.Exceptions;
 
 namespace CS4BB
 {
@@ -47,10 +48,10 @@ namespace CS4BB
                     if (gen.HasErrors())
                     {
                         Console.WriteLine("Please resolve the following errors first: ");
-                        
+
                         foreach (String error in gen.GetErrors())
                             Console.WriteLine("- {0}", error);
-                        
+
                         GeneralUtils.WriteErrorFile(directoryName, gen.GetErrors());
                     }
                 }
@@ -60,6 +61,11 @@ namespace CS4BB
             }
             catch (ArgumentException ex)
             {
+                Console.WriteLine(ex.Message);
+            }
+            catch (CompileErrorException ex)
+            {
+                Console.WriteLine("\nCompiler halt error, unable to continue because: \n");
                 Console.WriteLine(ex.Message);
             }
             catch (Exception ex)

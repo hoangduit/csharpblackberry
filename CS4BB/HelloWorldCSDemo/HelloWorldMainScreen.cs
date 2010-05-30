@@ -9,12 +9,12 @@ namespace HelloWorldCSDemo
         public HelloWorldMainScreen()
         {
             // Set the displayed title of the screen       
-            setTitle("Hello World Demo");
+            base.setTitle("Hello World Demo");
 
             // Add a read only text field (RichTextField) to the screen.  The
             // RichTextField is focusable by default. Here we provide a style
             // parameter to make the field non-focusable.
-            add(new RichTextField("Hello World!", Field.NON_FOCUSABLE));
+            base.add(new RichTextField("Hello World!", Field.NON_FOCUSABLE));
         }
 
         /***

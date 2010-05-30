@@ -79,6 +79,10 @@ namespace CS4BB
                 if (openStatementBlock.Identify(this.sourceCode, currentSourceCodeLine, pos))
                     currentLineResult = openStatementBlock.Compile(this.sourceCode, currentSourceCodeLine, pos);
 
+                ICommand classDef = new ClassDefinitionComp();
+                if (classDef.Identify(this.sourceCode, currentSourceCodeLine, pos))
+                    currentLineResult = classDef.Compile(this.sourceCode, currentSourceCodeLine, pos);
+
                 // TODO: Add additional commands here
 
                 if (!currentLineResult.Success)
