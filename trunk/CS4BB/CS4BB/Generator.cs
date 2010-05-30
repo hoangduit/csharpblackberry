@@ -65,9 +65,21 @@ namespace CS4BB
             {
                 CompileLineResult currentLineResult = new CompileLineResult(currentSourceCodeLine);
 
+                // TODO: For now we list the commands here, much get a better idea to handle (??) load it from a list (??)
+
                 ICommand usingDirective = new UsingDirectiveComp();
                 if (usingDirective.Identify(this.sourceCode, currentSourceCodeLine, pos))
                     currentLineResult = usingDirective.Compile(this.sourceCode, currentSourceCodeLine, pos);
+
+                ICommand namespaceComp = new NamespaceComp();
+                if (namespaceComp.Identify(this.sourceCode, currentSourceCodeLine, pos))
+                    currentLineResult = namespaceComp.Compile(this.sourceCode, currentSourceCodeLine, pos);
+
+                ICommand openStatementBlock = new OpenStatementBlockComp();
+                if (openStatementBlock.Identify(this.sourceCode, currentSourceCodeLine, pos))
+                    currentLineResult = openStatementBlock.Compile(this.sourceCode, currentSourceCodeLine, pos);
+
+                // TODO: Add additional commands here
 
                 if (!currentLineResult.Success)
                     this.errors.Add(currentLineResult.ErrorMessage);

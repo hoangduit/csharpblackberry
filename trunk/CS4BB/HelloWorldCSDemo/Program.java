@@ -1,8 +1,8 @@
 //using System.Linq;  // Not supported yet
 import net.rim.device.api.ui.*;
  
-namespace HelloWorldCSDemo
-{
+package HelloWorldCSDemo;
+
 class HelloWorldCSDemo : UiApplication
 {
 public HelloWorldCSDemo()

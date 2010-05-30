@@ -69,8 +69,8 @@ namespace CS4BB
         /// <returns></returns>
         public String GetNextLine(int aLinePosition)
         {
-            int nextLinePos = aLinePosition;
-            nextLinePos++;
+            //int nextLinePos = aLinePosition;
+            //nextLinePos++;
             return GetCode(this.sourceCode.ElementAtOrDefault<String>(aLinePosition));
         }
 
@@ -102,6 +102,22 @@ namespace CS4BB
         private bool ContainCode(string aCodeLine)
         {
             return aCodeLine != null && aCodeLine.Length > 0;
+        }
+
+        public String GetPreviousLine(String aCodeLine, int aLinePosition)
+        {
+            String result = "";
+            String currentCode = "";
+
+            int prevLinePos = aLinePosition;
+            while (currentCode.CompareTo(aCodeLine) == 0 || !ContainCode(currentCode))
+            {
+                prevLinePos--;
+                currentCode = GetCode(this.sourceCode.ElementAtOrDefault<String>(prevLinePos));
+            }
+
+            result = currentCode;
+            return result;
         }
     }
 }

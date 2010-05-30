@@ -2,8 +2,8 @@ import net.rim.device.api.ui.container.*;
 import net.rim.device.api.ui.component.*;
 import net.rim.device.api.ui.*;
  
-namespace HelloWorldCSDemo
-{
+package HelloWorldCSDemo;
+
 public class HelloWorldMainScreen: MainScreen
 {
 public HelloWorldMainScreen()
