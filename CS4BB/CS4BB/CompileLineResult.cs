@@ -27,7 +27,10 @@ namespace CS4BB
 
         public string GetCode()
         {
-            return newSourceLine;
+            String result = newSourceLine;
+            if (result.CompareTo("<br>") == 0)
+                result = "";
+            return result;
         }
 
         public bool IsValidCode()
