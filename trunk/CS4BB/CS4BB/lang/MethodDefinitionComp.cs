@@ -37,7 +37,7 @@ namespace CS4BB.lang
                 line = line.Replace("internal", "protected");
 
             if (line.IndexOf("internal protected") > -1)
-                line = line.Replace("internal", "protected");
+                line = line.Replace("internal protected", "protected");
 
             StringBuilder newLine = new StringBuilder();
 
