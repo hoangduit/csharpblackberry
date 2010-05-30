@@ -28,4 +28,3 @@ Dialog.alert("Goodbye!");
 base.close();
 }
 }
-}

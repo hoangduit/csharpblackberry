@@ -18,13 +18,13 @@ namespace CS4BB
 
             try
             {
-
-                if (!debugMode && args.Length == 0)
+                string[] arguments = Environment.GetCommandLineArgs();
+                if (!debugMode && arguments.Length == 0)
                     throw new ArgumentException("Pass the directory location to convert all C# files.");
 
-                String directoryName = debugMode ? @"C:\Lennie\Work\CSharpBlackberry\CS4BB\HelloWorldCSDemo" : GeneralUtils.GetParameter(args, 0);
+                String directoryName = debugMode ? @"C:\Lennie\Work\CSharpBlackberry\CS4BB\HelloWorldCSDemo" : GeneralUtils.getSourceDirectoryName(arguments);
 
-                if (!Directory.Exists(directoryName))
+                if (directoryName == null || !Directory.Exists(directoryName))
                     throw new ArgumentException("Directory {0} doesn't exist.", directoryName);
 
                 DirectoryInfo sourceDirectory = new DirectoryInfo(directoryName);
@@ -34,7 +34,7 @@ namespace CS4BB
 
                 foreach (FileInfo sourceFile in sourceFileList)
                 {
-                    SourceCode sourceCode = new SourceCode(sourceFile);
+                    SourceCode sourceCode = new SourceCode(sourceFile, arguments);
                     if (!sourceCode.DoesHaveCode())
                         throw new ArgumentException("There is no C# source code in the file: {0}", sourceFile.Name);
 

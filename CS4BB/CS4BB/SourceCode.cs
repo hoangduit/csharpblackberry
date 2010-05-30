@@ -10,10 +10,12 @@ namespace CS4BB
     {
         private FileInfo sourceFile;
         private List<String> sourceCode = new List<String>();
+        private string[] arguments;
 
-        public SourceCode(FileInfo aSourceFile)
+        public SourceCode(FileInfo aSourceFile, string[] aArguments)
         {
             this.sourceFile = aSourceFile;
+            this.arguments = aArguments;
             ReadSourceCode();
         }
 
@@ -104,6 +106,12 @@ namespace CS4BB
             return aCodeLine != null && aCodeLine.Length > 0;
         }
 
+        /// <summary>
+        /// Get the previous code line that isn't the same as the current code line
+        /// </summary>
+        /// <param name="aCodeLine"></param>
+        /// <param name="aLinePosition"></param>
+        /// <returns></returns>
         public String GetPreviousLine(String aCodeLine, int aLinePosition)
         {
             String result = "";
@@ -117,6 +125,38 @@ namespace CS4BB
             }
 
             result = currentCode;
+            return result;
+        }
+
+        /// <summary>
+        /// Indicate if program contain a given argument
+        /// </summary>
+        /// <param name="aSeachArgument"></param>
+        /// <returns></returns>
+        public bool ContainProgramArgument(string aSeachArgument)
+        {
+            var found = (from f in arguments
+                         where f.Trim().CompareTo(aSeachArgument) == 0
+                         select f).FirstOrDefault();
+            
+            return found != null;
+        }
+
+        /// <summary>
+        /// Indicate if there are more code
+        /// </summary>
+        /// <param name="aLinePosition"></param>
+        /// <returns></returns>
+        public bool IsThereMoreCode(int aLinePosition)
+        {
+            bool result = false;
+
+            for (int i = aLinePosition; i < this.sourceCode.ToArray().Length; i++)
+            {
+                if (ContainCode(this.sourceCode.ToArray()[i].Trim()))
+                    result = true;
+            }
+
             return result;
         }
     }
