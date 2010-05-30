@@ -1,1 +1,3 @@
-- ISubtractCalculate.cs: A C# file can only have one class just like Java. 
+- ISubtractCalculate.cs: Using directive not supported yet on line: 2
+- ISubtractCalculate.cs: Using directive not supported yet on line: 3
+- ISubtractCalculate.cs: Using directive not supported yet on line: 4
