@@ -10,10 +10,14 @@ namespace CS4BB.lang
     {
         public bool Identify(SourceCode aSourceCode, string aCurrentCodeLine, int aLinePosition)
         {
-            bool result = false;
+            return IdentifyClassDefinition(aSourceCode, aCurrentCodeLine, aLinePosition);
+        }
 
-            if ((aCurrentCodeLine.StartsWith("public") || 
-                 aCurrentCodeLine.StartsWith("class") || 
+        public static bool IdentifyClassDefinition(SourceCode aSourceCode, string aCurrentCodeLine, int aLinePosition)
+        {
+            bool result = false;
+            if ((aCurrentCodeLine.StartsWith("public") ||
+                 aCurrentCodeLine.StartsWith("class") ||
                  aCurrentCodeLine.StartsWith("protected") ||
                  aCurrentCodeLine.StartsWith("private") ||
                  aCurrentCodeLine.StartsWith("sealed") ||
@@ -22,7 +26,6 @@ namespace CS4BB.lang
                 aCurrentCodeLine.IndexOf("class") > -1 &&
                 (aCurrentCodeLine.EndsWith("{") || aSourceCode.GetNextLine(aLinePosition).StartsWith("{")))
                 result = true;
-
             return result;
         }
 
