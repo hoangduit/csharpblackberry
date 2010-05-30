@@ -17,4 +17,3 @@ HelloWorldCSDemo app = new HelloWorldCSDemo();
 app.enterEventDispatcher();
 }
 }
-}

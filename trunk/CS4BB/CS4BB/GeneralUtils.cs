@@ -26,6 +26,23 @@ namespace CS4BB
         }
 
         /// <summary>
+        /// Get the source directory
+        /// </summary>
+        /// <param name="aArguments"></param>
+        /// <returns></returns>
+        public static string getSourceDirectoryName(string[] aArguments)
+        {
+            String result = null;
+            for (int i = 0; i < aArguments.Length; i++)
+            {
+                if (!aArguments[i].Trim().StartsWith("-") && Directory.Exists(aArguments[i].Trim()))
+                    result = aArguments[i].Trim();
+            }
+
+            return result;
+        }
+
+        /// <summary>
         /// Get the assembly version number
         /// </summary>
         /// <returns></returns>

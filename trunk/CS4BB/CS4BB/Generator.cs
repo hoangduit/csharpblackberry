@@ -75,13 +75,17 @@ namespace CS4BB
                 if (namespaceComp.Identify(this.sourceCode, currentSourceCodeLine, pos))
                     currentLineResult = namespaceComp.Compile(this.sourceCode, currentSourceCodeLine, pos);
 
+                ICommand classDef = new ClassDefinitionComp();
+                if (classDef.Identify(this.sourceCode, currentSourceCodeLine, pos))
+                    currentLineResult = classDef.Compile(this.sourceCode, currentSourceCodeLine, pos);
+
                 ICommand openStatementBlock = new OpenStatementBlockComp();
                 if (openStatementBlock.Identify(this.sourceCode, currentSourceCodeLine, pos))
                     currentLineResult = openStatementBlock.Compile(this.sourceCode, currentSourceCodeLine, pos);
 
-                ICommand classDef = new ClassDefinitionComp();
-                if (classDef.Identify(this.sourceCode, currentSourceCodeLine, pos))
-                    currentLineResult = classDef.Compile(this.sourceCode, currentSourceCodeLine, pos);
+                ICommand closeStatementBlock = new CloseStatementBlockComp();
+                if (closeStatementBlock.Identify(this.sourceCode, currentSourceCodeLine, pos))
+                    currentLineResult = closeStatementBlock.Compile(this.sourceCode, currentSourceCodeLine, pos);
 
                 // TODO: Add additional commands here
 
