@@ -12,7 +12,7 @@ namespace CS4BB
         static void Main(string[] args)
         {
             Console.WriteLine("C# For Blackberry Version " + GeneralUtils.GetVersionNumber());
-            Console.WriteLine("GNU Lesser General Public License: http://www.gnu.org/licenses/lgpl.html");
+            Console.WriteLine("GNU Lesser General Public License: http://www.gnu.org/licenses/lgpl.html\n\n");
             bool debugMode = true; // TODO: Read this from application config
 
             try
@@ -37,15 +37,20 @@ namespace CS4BB
                     if (!sourceCode.DoesHaveCode())
                         throw new ArgumentException("There is no C# source code in the file: {0}", sourceFile.Name);
 
-                    Generator gen = new Generator(sourceCode, true);
+                    if (File.Exists(sourceCode.GetJavaDestinationFullName()))
+                        File.Delete(sourceCode.GetJavaDestinationFullName());
+
+                    Generator gen = new Generator(directoryName, sourceCode, true);
                     gen.Run();
+
+                    Console.WriteLine();
                     if (gen.HasErrors())
                     {
                         Console.WriteLine("Please resolve the following errors first: ");
+                        
                         foreach (String error in gen.GetErrors())
-                        {
                             Console.WriteLine("- {0}", error);
-                        }
+                        
                         GeneralUtils.WriteErrorFile(directoryName, gen.GetErrors());
                     }
                 }

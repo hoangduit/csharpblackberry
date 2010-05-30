@@ -1,6 +1,4 @@
-﻿using System;
-using System.Text;
-using net.rim.device.api.ui.container;
+﻿using net.rim.device.api.ui.container;
 using net.rim.device.api.ui.component;
 using net.rim.device.api.ui;
 
