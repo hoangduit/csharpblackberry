@@ -5,9 +5,14 @@ using System.Text;
 
 namespace CS4BB.lang
 {
-    class MainMethodComp: ICommand
+    public sealed class MainMethodComp: ICommand
     {
         public bool Identify(SourceCode aSourceCode, string aCurrentCodeLine, int aLinePosition)
+        {
+            return IdentifyMainMethod(aSourceCode, aCurrentCodeLine, aLinePosition);
+        }
+
+        public static bool IdentifyMainMethod(SourceCode aSourceCode, string aCurrentCodeLine, int aLinePosition)
         {
             bool result = false;
             if (aCurrentCodeLine.IndexOf("static") > -1 && aCurrentCodeLine.IndexOf("Main") > -1 && (aCurrentCodeLine.EndsWith("{") || aSourceCode.GetNextLine(aLinePosition).StartsWith("{")))

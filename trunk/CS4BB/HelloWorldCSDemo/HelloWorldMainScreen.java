@@ -2,7 +2,6 @@ import net.rim.device.api.ui.container.*;
 import net.rim.device.api.ui.component.*;
 import net.rim.device.api.ui.*;
  
-package HelloWorldCSDemo;
 
 public class HelloWorldMainScreen extends MainScreen
 {
@@ -21,7 +20,7 @@ base.add(new RichTextField("Hello World!", Field.NON_FOCUSABLE));
 * Displays a dialog box to the user with the text "Goodbye!" when the
 * application is closed.
 */
-public override void close()
+public  void close() throws Exception
 {
 // Display a farewell message before closing the application
 Dialog.alert("Goodbye!");
