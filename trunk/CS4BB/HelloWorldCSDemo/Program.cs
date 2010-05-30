@@ -1,8 +1,9 @@
 ﻿using System;
 using HelloWorldCSDemo;
+using System.Linq;
 using net.rim.device.api.ui;
 
-namespace com.demo.HelloWorldCSDemo
+namespace HelloWorldCSDemo
 {
     class HelloWorldCSDemo : UiApplication
     {
