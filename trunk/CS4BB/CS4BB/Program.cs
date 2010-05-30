@@ -47,17 +47,21 @@ namespace CS4BB
                     Console.WriteLine();
                     if (gen.HasErrors())
                     {
-                        Console.WriteLine("Please resolve the following errors first: ");
+                        Console.WriteLine("\nPlease resolve the following errors first:\n ");
 
                         foreach (String error in gen.GetErrors())
                             Console.WriteLine("- {0}", error);
 
                         GeneralUtils.WriteErrorFile(directoryName, gen.GetErrors());
+                        Console.WriteLine();
                     }
                 }
 
                 if (debugMode)
+                {
+                    Console.WriteLine("In debugging mode, press any key to continue...");
                     Console.ReadLine();
+                }
             }
             catch (ArgumentException ex)
             {
