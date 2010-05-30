@@ -86,6 +86,10 @@ namespace CS4BB
                 if (openStatementBlock.Identify(this.sourceCode, currentSourceCodeLine, pos))
                     currentLineResult = openStatementBlock.Compile(this.sourceCode, currentSourceCodeLine, pos);
 
+                ICommand mainMethod = new MainMethodComp();
+                if (mainMethod.Identify(this.sourceCode, currentSourceCodeLine, pos))
+                    currentLineResult = mainMethod.Compile(this.sourceCode, currentSourceCodeLine, pos);
+
                 ICommand closeStatementBlock = new CloseStatementBlockComp();
                 if (closeStatementBlock.Identify(this.sourceCode, currentSourceCodeLine, pos))
                     currentLineResult = closeStatementBlock.Compile(this.sourceCode, currentSourceCodeLine, pos);

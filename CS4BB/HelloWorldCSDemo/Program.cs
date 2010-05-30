@@ -1,6 +1,7 @@
 ﻿using System;
 using HelloWorldCSDemo;
 using System.Linq;
+using System.IO;
 using net.rim.device.api.ui;
 
 namespace HelloWorldCSDemo
