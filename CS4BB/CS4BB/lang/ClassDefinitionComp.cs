@@ -33,14 +33,53 @@ namespace CS4BB.lang
             String superClassName = GetSupperClassName(aCurrentCodeLine);
             if (superClassName != null)
             {
-                if (superClassName.IndexOf(",") > -1)
-                    throw new CompileErrorException(aSourceCode.GetFileName() + ": C# doesn't support multiple inheritance and interfaces aren't supported yet");
+               
+                String classDef = GetClassDefinition(aCurrentCodeLine);
 
                 StringBuilder newLine = new StringBuilder();
-                newLine.Append(GetClassDefinition(aCurrentCodeLine)).Append(" extends ").Append(superClassName);
+                if (classDef.StartsWith("class"))
+                    newLine.Append("public ");
+                
+                newLine.Append(classDef);
+
+                if (superClassName.IndexOf(",") > -1)
+                    newLine.Append(" extends ").Append(GetExtendClass(superClassName)).Append(GetInterfaces(superClassName));
+                else
+                    newLine.Append(" extends ").Append(superClassName);
 
                 result = new CompileLineResult(newLine.ToString());
             }
+            return result;
+        }
+
+        private String GetInterfaces(string aSuperClassName)
+        {
+            StringBuilder result = new StringBuilder();
+            String[] st = aSuperClassName.Split(',');
+            if (st.Length > 0)
+            {
+                bool isFirstInterface = true;
+                for (int i = 1; i < st.Length; i++)
+                {
+                    if (st[i].Trim().StartsWith("I"))
+                    {
+                        if (!isFirstInterface)
+                            result.Append(",");
+                        
+                        result.Append(st[i].Trim());
+                        isFirstInterface = false;
+                    }
+                }
+            }
+            return result.Length > 0 ? " implements " + result.ToString() : "";
+        }
+
+        private String GetExtendClass(string aSuperClassName)
+        {
+            String result = "";
+            String[] st = aSuperClassName.Split(',');
+            if (st.Length > 0)
+                result = st[0].Trim();
             return result;
         }
 
