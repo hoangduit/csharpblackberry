@@ -10,7 +10,7 @@ namespace HelloWorldCSDemo
         public HelloWorldCSDemo()
         {
             HelloWorldMainScreen mainScreen = new HelloWorldMainScreen();
-            pushScreen(mainScreen);
+            base.pushScreen(mainScreen);
         }
 
         static void Main(string[] args)
