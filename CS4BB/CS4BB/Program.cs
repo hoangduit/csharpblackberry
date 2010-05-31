@@ -22,7 +22,7 @@ namespace CS4BB
                 if (!debugMode && arguments.Length == 0)
                     throw new ArgumentException("Pass the directory location to convert all C# files.");
 
-                String directoryName = debugMode ? @"C:\Lennie\Work\CSharpBlackberry\CS4BB\InterfacesDemo" : GeneralUtils.getSourceDirectoryName(arguments);
+                String directoryName = debugMode ? @"C:\Lennie\Work\CSharpBlackberry\CS4BB\HelloWorldCSDemo" : GeneralUtils.getSourceDirectoryName(arguments);
 
                 if (directoryName == null || !Directory.Exists(directoryName))
                     throw new ArgumentException("Directory {0} doesn't exist.", directoryName);

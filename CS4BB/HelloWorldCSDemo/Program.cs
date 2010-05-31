@@ -7,6 +7,7 @@ using net.rim.device.api.ui;
 namespace HelloWorldCSDemo
 {
     class HelloWorldCSDemo : UiApplication
+    
     {
         public HelloWorldCSDemo()
         {
