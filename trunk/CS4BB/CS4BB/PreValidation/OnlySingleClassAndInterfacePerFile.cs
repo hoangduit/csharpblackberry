@@ -45,7 +45,7 @@ namespace CS4BB.PreValidation
             int pos = 1;
             foreach(String line in aSourceCode.GetLines())
             {
-                if (line.IndexOf("interface") > -1 && aSourceCode.GetNextLine(pos).StartsWith("{"))
+                if (line.IndexOf("interface") > -1 && (line.EndsWith("{") || aSourceCode.GetNextLine(pos).StartsWith("{")))
                     result++;
                 pos++;
             }

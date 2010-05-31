@@ -67,7 +67,7 @@ namespace CS4BB.lang
                     if (st[i].Trim().StartsWith("I"))
                     {
                         if (!isFirstInterface)
-                            result.Append(",");
+                            result.Append(", ");
                         
                         result.Append(st[i].Trim());
                         isFirstInterface = false;
