@@ -86,8 +86,6 @@ namespace CS4BB
                 while ((line = file.ReadLine()) != null)
                     if (ContainCode(line))
                         sourceCode.Add(GetCode(line));
-                    else
-                        sourceCode.Add(" ");
             }
             finally
             {
@@ -103,7 +101,7 @@ namespace CS4BB
 
         private bool ContainCode(string aCodeLine)
         {
-            return aCodeLine != null && aCodeLine.Length > 0;
+            return aCodeLine != null && aCodeLine.Trim().Length > 0;
         }
 
         /// <summary>
