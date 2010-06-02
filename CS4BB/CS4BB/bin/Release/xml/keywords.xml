@@ -1,4 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<keywords>
-  
-</keywords>
+<Keywords>
+  <keyword>
+    <CSharp>sealed</CSharp>
+    <Java>final</Java>
+  </keyword>
+  <keyword>
+    <CSharp>base.</CSharp>
+    <Java>super.</Java>
+  </keyword>
+</Keywords>

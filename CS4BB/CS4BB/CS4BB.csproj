@@ -76,6 +76,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="lang\Keywords.cs">
+      <DependentUpon>Keywords.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="lang\KeywordsComp.cs" />
     <Compile Include="TargetCodeResult.cs" />
     <Compile Include="Exceptions\CompileErrorException.cs" />
     <Compile Include="GeneralUtils.cs" />
@@ -103,7 +107,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SourceCode.cs" />
     <Compile Include="Tests\Core\ClassDefinitionCompTest.cs" />
+    <Compile Include="Tests\Core\KeywordsCompTest.cs" />
     <Compile Include="Tests\Core\MainMethodCompTest.cs" />
+    <Compile Include="Tests\Core\MethodDefinitionCompTest.cs" />
     <Compile Include="Tests\Core\NamespaceCompDirectiveTest.cs" />
     <Compile Include="Tests\Core\UsingCompDirectiveTest.cs" />
   </ItemGroup>
@@ -119,6 +125,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="lang\Keywords.xsd" />
     <None Include="lang\UsingDirectives.xsc">
       <DependentUpon>UsingDirectives.xsd</DependentUpon>
     </None>

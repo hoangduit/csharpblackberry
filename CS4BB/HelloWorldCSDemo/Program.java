@@ -8,7 +8,7 @@ public class HelloWorldCSDemo extends UiApplication
 public HelloWorldCSDemo()
 {
 HelloWorldMainScreen mainScreen = new HelloWorldMainScreen();
-base.pushScreen(mainScreen);
+super.pushScreen(mainScreen);
 }
 public static void main(String[] args)
 {
