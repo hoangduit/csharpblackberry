@@ -114,6 +114,10 @@ namespace CS4BB
                 if (closeStatementBlock.Identify(this.sourceCode, currentSourceCodeLine, pos))
                     targetCode = closeStatementBlock.Compile(this.sourceCode, currentSourceCodeLine, pos);
 
+                ICommand keywords = new KeywordsComp();
+                if (keywords.Identify(this.sourceCode, currentSourceCodeLine, pos))
+                    targetCode = keywords.Compile(this.sourceCode, currentSourceCodeLine, pos);
+
                 // TODO: Add additional commands here
 
                 if (!targetCode.Success)
