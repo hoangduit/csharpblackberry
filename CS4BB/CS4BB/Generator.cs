@@ -15,15 +15,16 @@ namespace CS4BB
         private List<String> errors = new List<String>();
         private string directoryName;
         private bool writeJavaCode;
-        private TargetCodeResult targetCode;
-        private bool unitTestMode;
+        private List<String> allCode = new List<String>();
+
+        public bool UnitTestMode { get; set; }
 
         public Generator(SourceCode sourceCode)
         {
             this.sourceCode = sourceCode;
             this.displayProgress = false;
             this.writeJavaCode = false;
-            this.unitTestMode = false;
+            this.UnitTestMode = false;
         }
 
         public Generator(string aDirectoryName, SourceCode aSourceCode, bool aDisplayProgress)
@@ -32,7 +33,7 @@ namespace CS4BB
             this.sourceCode = aSourceCode;
             this.displayProgress = aDisplayProgress;
             this.writeJavaCode = true;
-            this.unitTestMode = false;
+            this.UnitTestMode = false;
         }
 
         public Generator(List<String> aSourceCodeForTesting, bool aUnitTestMode)
@@ -40,7 +41,7 @@ namespace CS4BB
             this.sourceCode = new SourceCode(aSourceCodeForTesting);
             this.displayProgress = false;
             this.writeJavaCode = false;
-            this.unitTestMode = aUnitTestMode;
+            this.UnitTestMode = aUnitTestMode;
         }
         
         /// <summary>
@@ -48,7 +49,7 @@ namespace CS4BB
         /// </summary>
         public void Run()
         {
-            if (!unitTestMode) 
+            if (!UnitTestMode) 
                 RunPreValidation();
             
             if (!HasErrors())
@@ -78,49 +79,49 @@ namespace CS4BB
                 Console.WriteLine("Start compiling... File: {0}", this.sourceCode.GetFileName());
 
             int pos = 1;
-            targetCode = new TargetCodeResult();
+            
             foreach (String currentSourceCodeLine in this.sourceCode.GetLines())
             {
-                targetCode.CurrentCodeLine.Code  = currentSourceCodeLine;
+                TargetCodeResult targetCode = new TargetCodeResult(currentSourceCodeLine);
 
                 // TODO: For now we list the commands here, much get a better idea to handle (??) load it from a list (??)
 
                 ICommand usingDirective = new UsingDirectiveComp();
                 if (usingDirective.Identify(this.sourceCode, currentSourceCodeLine, pos))
-                    targetCode.CurrentCodeLine = usingDirective.Compile(this.sourceCode, currentSourceCodeLine, pos).CurrentCodeLine;
+                    targetCode = usingDirective.Compile(this.sourceCode, currentSourceCodeLine, pos);
 
                 ICommand namespaceComp = new NamespaceComp();
                 if (namespaceComp.Identify(this.sourceCode, currentSourceCodeLine, pos))
-                    targetCode.CurrentCodeLine = namespaceComp.Compile(this.sourceCode, currentSourceCodeLine, pos).CurrentCodeLine;
+                    targetCode = namespaceComp.Compile(this.sourceCode, currentSourceCodeLine, pos);
 
                 ICommand classDef = new ClassDefinitionComp();
                 if (classDef.Identify(this.sourceCode, currentSourceCodeLine, pos))
-                    targetCode.CurrentCodeLine = classDef.Compile(this.sourceCode, currentSourceCodeLine, pos).CurrentCodeLine;
+                    targetCode = classDef.Compile(this.sourceCode, currentSourceCodeLine, pos);
 
                 ICommand openStatementBlock = new OpenStatementBlockComp();
                 if (openStatementBlock.Identify(this.sourceCode, currentSourceCodeLine, pos))
-                    targetCode.CurrentCodeLine = openStatementBlock.Compile(this.sourceCode, currentSourceCodeLine, pos).CurrentCodeLine;
+                    targetCode = openStatementBlock.Compile(this.sourceCode, currentSourceCodeLine, pos);
 
                 ICommand mainMethod = new MainMethodComp();
                 if (mainMethod.Identify(this.sourceCode, currentSourceCodeLine, pos))
-                    targetCode.CurrentCodeLine = mainMethod.Compile(this.sourceCode, currentSourceCodeLine, pos).CurrentCodeLine;
+                    targetCode = mainMethod.Compile(this.sourceCode, currentSourceCodeLine, pos);
 
                 ICommand methodDef = new MethodDefinitionComp();
                 if (methodDef.Identify(this.sourceCode, currentSourceCodeLine, pos))
-                    targetCode.CurrentCodeLine = methodDef.Compile(this.sourceCode, currentSourceCodeLine, pos).CurrentCodeLine;
+                    targetCode = methodDef.Compile(this.sourceCode, currentSourceCodeLine, pos);
 
                 ICommand closeStatementBlock = new CloseStatementBlockComp();
                 if (closeStatementBlock.Identify(this.sourceCode, currentSourceCodeLine, pos))
-                    targetCode.CurrentCodeLine = closeStatementBlock.Compile(this.sourceCode, currentSourceCodeLine, pos).CurrentCodeLine;
+                    targetCode = closeStatementBlock.Compile(this.sourceCode, currentSourceCodeLine, pos);
 
                 // TODO: Add additional commands here
 
-                if (!targetCode.CurrentCodeLine.Success)
-                    this.errors.Add(targetCode.CurrentCodeLine.ErrorMessage);
-                
-                if (unitTestMode)
-                    targetCode.AddTargetCode(targetCode.CurrentCodeLine);
+                if (!targetCode.Success)
+                    this.errors.Add(targetCode.ErrorMessage);
 
+                if (UnitTestMode)
+                    this.allCode.Add(targetCode.GetCurrentCode());
+                
                 if (writeJavaCode && targetCode.IsValidCode())
                     WriteJavaLine(targetCode);
 
@@ -147,12 +148,17 @@ namespace CS4BB
         }
 
         /// <summary>
-        /// Return the target code after compile complete
+        /// Return all the code back as a string
         /// </summary>
         /// <returns></returns>
-        public TargetCodeResult GetTargetCode()
+        public String GetAllCode()
         {
-            return this.targetCode;
+            StringBuilder result = new StringBuilder();
+            
+            foreach (String code in this.allCode)
+                result.Append(code);
+
+            return result.ToString();
         }
 
         private void WriteJavaLine(TargetCodeResult currentLineResult)

@@ -17,7 +17,7 @@ namespace CS4BB.Tests.Core
             Generator gen = new Generator(code, true);
             gen.Run();
             Assert.IsTrue(gen.HasErrors(), "got errors");
-            Assert.AreEqual("//using System.Linq;  // Not supported yet", gen.GetTargetCode().GetAllCode());
+            Assert.AreEqual("//using System.Linq;  // Not supported yet", gen.GetAllCode());
         }
 
         [Test]
@@ -28,7 +28,7 @@ namespace CS4BB.Tests.Core
             Generator gen = new Generator(code, true);
             gen.Run();
             Assert.IsFalse(gen.HasErrors(), "Not suppose to have errors");
-            Assert.AreEqual("import net.rim.device.api.ui.*;", gen.GetTargetCode().GetAllCode());
+            Assert.AreEqual("import net.rim.device.api.ui.*;", gen.GetAllCode());
         }
     }
 }

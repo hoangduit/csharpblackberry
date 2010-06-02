@@ -7,8 +7,9 @@ namespace CS4BB
 {
     public sealed class TargetCodeResult
     {
-        public TargetCode CurrentCodeLine { get; set; }
-        public List<TargetCode> allTargetCode;
+        public bool Success { get; set; }
+        public string ErrorMessage { get; set; }
+        public string CurrentCode { get; set; }
 
         /// <summary>
         /// Create a new source target
@@ -16,7 +17,7 @@ namespace CS4BB
         /// <param name="aCode"></param>
         public TargetCodeResult(string aCode): this()
         {            
-            this.CurrentCodeLine.Code = aCode;
+            this.CurrentCode = aCode;
         }
 
         /// <summary>
@@ -24,9 +25,8 @@ namespace CS4BB
         /// </summary>
         public TargetCodeResult()
         {
-            this.CurrentCodeLine = new TargetCode();
-            this.CurrentCodeLine.Success = true;
-            this.CurrentCodeLine.ErrorMessage = null;
+            this.Success = true;
+            this.ErrorMessage = null;
         }
 
         /// <summary>
@@ -35,8 +35,8 @@ namespace CS4BB
         /// <param name="aErrorMessage"></param>
         public void LogError(string aErrorMessage)
         {
-            this.CurrentCodeLine.ErrorMessage = aErrorMessage;
-            this.CurrentCodeLine.Success = false;
+            this.ErrorMessage = aErrorMessage;
+            this.Success = false;
         }
 
         /// <summary>
@@ -45,23 +45,10 @@ namespace CS4BB
         /// <returns></returns>
         public string GetCurrentCode()
         {
-            String result = this.CurrentCodeLine.Code;
+            String result = this.CurrentCode;
             if (result.CompareTo("<br>") == 0)
                 result = "";
             return result;
-        }
-
-        /// <summary>
-        /// Get all the target code
-        /// </summary>
-        /// <returns></returns>
-        public String GetAllCode()
-        {
-            StringBuilder result = new StringBuilder();
-            foreach (TargetCode code in this.allTargetCode)
-                result.Append(code.Code);
-
-            return result.ToString();
         }
 
         /// <summary>
@@ -70,19 +57,7 @@ namespace CS4BB
         /// <returns></returns>
         public bool IsValidCode()
         {
-            return CurrentCodeLine != null && CurrentCodeLine.Code != null && CurrentCodeLine.Code.Length > 0;
-        }
-
-        /// <summary>
-        /// Add code end result is that this class will contain the entire target code
-        /// </summary>
-        /// <param name="aTarget"></param>
-        public void AddTargetCode(TargetCode aTarget)
-        {
-            if (this.allTargetCode == null)
-                this.allTargetCode = new List<TargetCode>();
-
-            this.allTargetCode.Add(aTarget);
+            return this.CurrentCode != null && this.CurrentCode != null && this.CurrentCode.Length > 0;
         }
     }
 }

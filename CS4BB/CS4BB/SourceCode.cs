@@ -151,11 +151,17 @@ namespace CS4BB
         /// <returns></returns>
         public bool ContainProgramArgument(string aSeachArgument)
         {
-            var found = (from f in arguments
-                         where f.Trim().CompareTo(aSeachArgument) == 0
-                         select f).FirstOrDefault();
-            
-            return found != null;
+            bool result = false;
+
+            if (arguments != null && !String.IsNullOrEmpty(aSeachArgument))
+            {
+                var found = (from f in arguments
+                            where f.Trim().CompareTo(aSeachArgument) == 0
+                            select f).FirstOrDefault();
+                
+                result = found != null;
+            }
+            return result;
         }
 
         /// <summary>
