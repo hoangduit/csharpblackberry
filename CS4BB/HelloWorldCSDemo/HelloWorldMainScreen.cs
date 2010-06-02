@@ -9,7 +9,7 @@ namespace HelloWorldCSDemo
         public HelloWorldMainScreen()
         {
             // Set the displayed title of the screen       
-            base.setTitle("Hello World Demo");
+            base.setTitle(getAppTitle());
 
             // Add a read only text field (RichTextField) to the screen.  The
             // RichTextField is focusable by default. Here we provide a style
@@ -26,6 +26,15 @@ namespace HelloWorldCSDemo
             // Display a farewell message before closing the application
             Dialog.alert("Goodbye!");
             base.close();
-        }   
+        }
+
+        /// <summary>
+        /// Return the application title
+        /// </summary>
+        /// <returns></returns>
+        internal string getAppTitle()
+        {
+            return "Hello World Demo";
+        }
     }
 }

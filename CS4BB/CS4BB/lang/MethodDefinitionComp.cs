@@ -12,10 +12,10 @@ namespace CS4BB.lang
             // TODO: We need to also cater for C# properties later on
 
             bool result = false;
-            if ((aCurrentCodeLine.StartsWith("public") || aCurrentCodeLine.IndexOf("void") > -1) &&
-                aSourceCode.CountTokens(aCurrentCodeLine, '(') == 1 &&
+            if (aSourceCode.CountTokens(aCurrentCodeLine, '(') == 1 &&
                 aSourceCode.CountTokens(aCurrentCodeLine, ')') == 1 &&
                 aCurrentCodeLine.IndexOf(aSourceCode.GetFileName()) == -1 &&
+                !aSourceCode.ContainKeyword(aCurrentCodeLine, "class") &&
                 aCurrentCodeLine.Split(' ').Length > 2 &&
                 !MainMethodComp.IdentifyMainMethod(aSourceCode, aCurrentCodeLine, aLinePosition) &&
                 (aCurrentCodeLine.EndsWith("{") || aSourceCode.GetNextLine(aLinePosition).StartsWith("{")))
@@ -24,20 +24,20 @@ namespace CS4BB.lang
             return result;
         }
 
-        public CompileLineResult Compile(SourceCode aSourceCode, string aCurrentCodeLine, int aLinePosition)
+        public TargetCodeResult Compile(SourceCode aSourceCode, string aCurrentCodeLine, int aLinePosition)
         {
             String line = aCurrentCodeLine;
-            if (line.IndexOf("override") > -1)
-                line = line.Replace("override", "");
+            if (aSourceCode.ContainKeyword(aCurrentCodeLine, "override"))
+                line = aSourceCode.RemoveKeyword(line, "override");
 
-            if (line.IndexOf("virtual") > -1)
-                line = line.Replace("virtual", "");
+            if (aSourceCode.ContainKeyword(aCurrentCodeLine, "virtual"))
+                line = aSourceCode.RemoveKeyword(line,"virtual");
 
-            if (line.IndexOf("internal") > -1)
-                line = line.Replace("internal", "protected");
+            if (aSourceCode.ContainKeyword(aCurrentCodeLine, "internal"))
+                line = aSourceCode.ReplaceKeyword(line, "internal", "protected");
 
-            if (line.IndexOf("internal protected") > -1)
-                line = line.Replace("internal protected", "protected");
+            if (aSourceCode.ContainKeyword(aCurrentCodeLine, "internal protected"))
+                line = aSourceCode.ReplaceKeyword(line, "internal protected", "protected");
 
             StringBuilder newLine = new StringBuilder();
 
@@ -45,7 +45,7 @@ namespace CS4BB.lang
             if (aSourceCode.ContainProgramArgument("-throwexceptions"))
             newLine.Append(" throws Exception");
             
-            return new CompileLineResult(newLine.ToString());
+            return new TargetCodeResult(newLine.ToString());
         }
     }
 }

@@ -14,7 +14,7 @@ namespace CS4BB
         {
             Console.WriteLine("C# For Blackberry Version " + GeneralUtils.GetVersionNumber());
             Console.WriteLine("GNU Lesser General Public License: http://www.gnu.org/licenses/lgpl.html\n\n");
-            bool debugMode = false; // TODO: Read this from application config
+            bool debugMode = true; // TODO: Read this from application config
 
             try
             {
@@ -25,18 +25,18 @@ namespace CS4BB
                 String directoryName = debugMode ? @"C:\Lennie\Work\CSharpBlackberry\CS4BB\HelloWorldCSDemo" : GeneralUtils.getSourceDirectoryName(arguments);
 
                 if (directoryName == null || !Directory.Exists(directoryName))
-                    throw new ArgumentException("Directory {0} doesn't exist.", directoryName);
+                    throw new ArgumentException(String.Format("Directory doesn't exist: {0}", directoryName));
 
                 DirectoryInfo sourceDirectory = new DirectoryInfo(directoryName);
                 FileInfo[] sourceFileList = sourceDirectory.GetFiles("*.cs");
                 if (sourceFileList == null || sourceFileList.Length == 0)
-                    new ArgumentException("No C# files found to compile in directory: {0}", directoryName);
+                    new ArgumentException(String.Format("No C# files found to compile in directory: {0}", directoryName));
 
                 foreach (FileInfo sourceFile in sourceFileList)
                 {
                     SourceCode sourceCode = new SourceCode(sourceFile, arguments);
                     if (!sourceCode.DoesHaveCode())
-                        throw new ArgumentException("There is no C# source code in the file: {0}", sourceFile.Name);
+                        throw new ArgumentException(String.Format("There is no C# source code in the file: {0}", sourceFile.Name));
 
                     if (File.Exists(sourceCode.GetJavaDestinationFullName()))
                         File.Delete(sourceCode.GetJavaDestinationFullName());

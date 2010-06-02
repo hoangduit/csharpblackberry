@@ -8,6 +8,6 @@ namespace CS4BB.lang
     public interface ICommand
     {
         bool Identify(SourceCode aSourceCode, string aCurrentCodeLine, int aLinePosition);
-        CompileLineResult Compile(SourceCode aSourceCode, string aCurrentCodeLine, int aLinePosition);
+        TargetCodeResult Compile(SourceCode aSourceCode, string aCurrentCodeLine, int aLinePosition);
     }
 }

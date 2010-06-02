@@ -17,9 +17,9 @@ namespace CS4BB.lang
             return result;
         }
 
-        public CompileLineResult Compile(SourceCode aSourceCode, string aCurrentCodeLine, int aLinePosition)
+        public TargetCodeResult Compile(SourceCode aSourceCode, string aCurrentCodeLine, int aLinePosition)
         {
-            return new CompileLineResult("");
+            return new TargetCodeResult("");
         }
     }
 }

@@ -11,12 +11,30 @@ namespace CS4BB
         private FileInfo sourceFile;
         private List<String> sourceCode = new List<String>();
         private string[] arguments;
-
+        
+        /// <summary>
+        /// Create a new source code from C# file
+        /// </summary>
+        /// <param name="aSourceFile"></param>
+        /// <param name="aArguments"></param>
         public SourceCode(FileInfo aSourceFile, string[] aArguments)
         {
             this.sourceFile = aSourceFile;
             this.arguments = aArguments;
             ReadSourceCode();
+        }
+
+        /// <summary>
+        /// Create a new source code object that just contain a list of code
+        /// </summary>
+        /// <param name="aSourceCodeForTesting"></param>
+        public SourceCode(List<String> aSourceCodeForTesting)
+        {
+            foreach (String code in aSourceCodeForTesting)
+            {
+                if (ContainCode(code))
+                    sourceCode.Add(GetCode(code));
+            }
         }
 
         /// <summary>
@@ -52,7 +70,7 @@ namespace CS4BB
         /// <returns></returns>
         public String GetFileName()
         {
-            return this.sourceFile.Name;
+            return this.sourceFile != null ? this.sourceFile.Name : "Unit Test";
         }
 
         /// <summary>
@@ -174,6 +192,82 @@ namespace CS4BB
                 result++;
             }
             return result;
+        }
+
+        /// <summary>
+        /// Check if the code contain a specific keyword
+        /// </summary>
+        /// <param name="aCode"></param>
+        /// <param name="aKeyWord"></param>
+        /// <returns></returns>
+        public bool ContainKeyword(String aCode, String aKeyWord)
+        {
+            bool result = false;
+            
+            if (aCode.IndexOf(" ") > -1)
+            {
+                var found = (from c in aCode.Split(' ')
+                             where c.CompareTo(aKeyWord.Trim()) == 0
+                             select c).FirstOrDefault();
+                result = found != null;
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Remove a keyword from a code line
+        /// </summary>
+        /// <param name="aCode"></param>
+        /// <param name="aKeyWord"></param>
+        /// <returns></returns>
+        public String RemoveKeyword(String aCode, String aKeyWord)
+        {
+            StringBuilder result = new StringBuilder();
+
+            if (aCode.IndexOf(" ") > -1)
+            {
+                List<String> codeLeft = (from c in aCode.Split(' ')
+                             where c.CompareTo(aKeyWord.Trim()) != 0
+                             select c).ToList<String>();
+
+                foreach (String code in codeLeft)
+                    result.Append(code).Append(" ");
+            }
+            else
+                result.Append(aCode);
+
+            return result.ToString();
+        }
+
+        /// <summary>
+        /// Replace one keyword with another
+        /// </summary>
+        /// <param name="aCode"></param>
+        /// <param name="aOldKeyWord"></param>
+        /// <param name="aNewKeyWord"></param>
+        /// <returns></returns>
+        public String ReplaceKeyword(string aCode, string aOldKeyWord, string aNewKeyWord)
+        {
+            StringBuilder result = new StringBuilder();
+
+            if (aCode.IndexOf(" ") > -1)
+            {
+                List<String> keywords = (from c in aCode.Split(' ')
+                                         select c).ToList<String>();
+
+                foreach (String keyword in keywords)
+                {
+                    if (keyword.CompareTo(aOldKeyWord) == 0)
+                      result.Append(aNewKeyWord).Append(" ");
+                    else
+                        result.Append(keyword).Append(" ");
+                }
+            }
+            else
+                result.Append(aCode);
+
+            return result.ToString();
         }
     }
 }

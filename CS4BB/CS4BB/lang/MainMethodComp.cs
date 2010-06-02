@@ -15,19 +15,19 @@ namespace CS4BB.lang
         public static bool IdentifyMainMethod(SourceCode aSourceCode, string aCurrentCodeLine, int aLinePosition)
         {
             bool result = false;
-            if (aCurrentCodeLine.IndexOf("static") > -1 && aCurrentCodeLine.IndexOf("Main") > -1 && (aCurrentCodeLine.EndsWith("{") || aSourceCode.GetNextLine(aLinePosition).StartsWith("{")))
+            if (aSourceCode.ContainKeyword(aCurrentCodeLine, "static") && aCurrentCodeLine.IndexOf("Main") > -1  && (aCurrentCodeLine.EndsWith("{") || aSourceCode.GetNextLine(aLinePosition).StartsWith("{")))
                 result = true;
             return result;
         }
 
-        public CompileLineResult Compile(SourceCode aSourceCode, string aCurrentCodeLine, int aLinePosition)
+        public TargetCodeResult Compile(SourceCode aSourceCode, string aCurrentCodeLine, int aLinePosition)
         {
             StringBuilder newLine = new StringBuilder();
 
             newLine.Append("public static void main(String[] args)");
             if (aCurrentCodeLine.EndsWith("{"))
                 newLine.Append(" { ");
-            return new CompileLineResult(newLine.ToString());
+            return new TargetCodeResult(newLine.ToString());
         }
     }
 }
