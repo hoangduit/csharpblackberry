@@ -87,34 +87,35 @@ namespace CS4BB
                 // TODO: For now we list the commands here, much get a better idea to handle (??) load it from a list (??)
 
                 ICommand usingDirective = new UsingDirectiveComp();
+                ICommand namespaceComp = new NamespaceComp();
+                ICommand classDef = new ClassDefinitionComp();
+                ICommand openStatementBlock = new OpenStatementBlockComp();
+                ICommand mainMethod = new MainMethodComp();
+                ICommand methodDef = new MethodDefinitionComp();
+                ICommand closeStatementBlock = new CloseStatementBlockComp();
+                ICommand keywords = new KeywordsComp();
+
                 if (usingDirective.Identify(this.sourceCode, currentSourceCodeLine, pos))
                     targetCode = usingDirective.Compile(this.sourceCode, currentSourceCodeLine, pos);
 
-                ICommand namespaceComp = new NamespaceComp();
                 if (namespaceComp.Identify(this.sourceCode, currentSourceCodeLine, pos))
                     targetCode = namespaceComp.Compile(this.sourceCode, currentSourceCodeLine, pos);
 
-                ICommand classDef = new ClassDefinitionComp();
                 if (classDef.Identify(this.sourceCode, currentSourceCodeLine, pos))
                     targetCode = classDef.Compile(this.sourceCode, currentSourceCodeLine, pos);
 
-                ICommand openStatementBlock = new OpenStatementBlockComp();
                 if (openStatementBlock.Identify(this.sourceCode, currentSourceCodeLine, pos))
                     targetCode = openStatementBlock.Compile(this.sourceCode, currentSourceCodeLine, pos);
 
-                ICommand mainMethod = new MainMethodComp();
                 if (mainMethod.Identify(this.sourceCode, currentSourceCodeLine, pos))
                     targetCode = mainMethod.Compile(this.sourceCode, currentSourceCodeLine, pos);
 
-                ICommand methodDef = new MethodDefinitionComp();
                 if (methodDef.Identify(this.sourceCode, currentSourceCodeLine, pos))
                     targetCode = methodDef.Compile(this.sourceCode, currentSourceCodeLine, pos);
 
-                ICommand closeStatementBlock = new CloseStatementBlockComp();
                 if (closeStatementBlock.Identify(this.sourceCode, currentSourceCodeLine, pos))
                     targetCode = closeStatementBlock.Compile(this.sourceCode, currentSourceCodeLine, pos);
 
-                ICommand keywords = new KeywordsComp();
                 if (keywords.Identify(this.sourceCode, currentSourceCodeLine, pos))
                     targetCode = keywords.Compile(this.sourceCode, currentSourceCodeLine, pos);
 

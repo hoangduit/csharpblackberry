@@ -1,7 +1,6 @@
 import net.rim.device.api.ui.container.*;
 import net.rim.device.api.ui.component.*;
 import net.rim.device.api.ui.*;
-package HelloWorldCSDemo;
 
 public class HelloWorldMainScreen extends MainScreen
 {
@@ -28,7 +27,7 @@ super.close();
 /// Return the application title
 /// </summary>
 /// <returns></returns>
-protected string getAppTitle() 
+protected String getAppTitle()
 {
 return "Hello World Demo";
 }

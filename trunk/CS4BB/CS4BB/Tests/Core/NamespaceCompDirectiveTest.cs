@@ -17,8 +17,8 @@ namespace CS4BB.Tests.Core
             Generator gen = new Generator(code, true);
             gen.Run();
             Assert.IsFalse(gen.HasErrors(), "Not suppose to have errors");
-            Assert.AreEqual("package com.lennie.test;", gen.GetAllCode());
-
+            Assert.IsNullOrEmpty(gen.GetAllCode());
+            //Assert.AreEqual("package com.lennie.test;", gen.GetAllCode());
         }
     }
 }
