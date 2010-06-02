@@ -60,6 +60,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="nunit.framework, Version=2.5.5.10112, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core">
@@ -75,7 +76,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CompileLineResult.cs" />
+    <Compile Include="TargetCode.cs" />
+    <Compile Include="TargetCodeResult.cs" />
     <Compile Include="Exceptions\CompileErrorException.cs" />
     <Compile Include="GeneralUtils.cs" />
     <Compile Include="Generator.cs" />
@@ -101,10 +103,13 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SourceCode.cs" />
+    <Compile Include="Tests\Core\MainMethodCompTest.cs" />
+    <Compile Include="Tests\Core\UsingCompDirectiveTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Documentation\Java Blackberry API.txt" />
-    <Content Include="xml\keywords.xml">
+    <Content Include="Tests\Unit Testing.txt" />
+    <Content Include="xml\Keywords.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="xml\UsingDirectives.xml">
@@ -148,6 +153,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Tests\Issues\" />
     <Folder Include="UsingDirective\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

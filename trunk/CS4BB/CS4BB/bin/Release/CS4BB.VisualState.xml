@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<VisualState xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ShowCheckBoxes="false">
+  <TopNode>[0-1000]C:\Lennie\Work\CSharpBlackberry\CS4BB\CS4BB\bin\Release\CS4BB.nunit</TopNode>
+  <SelectedNode>[0-1005]CS4BB.Tests.Core.MainMethodCompTest.Compile</SelectedNode>
+  <ExcludeCategories>false</ExcludeCategories>
+  <Nodes>
+    <Node UniqueName="[0-1000]C:\Lennie\Work\CSharpBlackberry\CS4BB\CS4BB\bin\Release\CS4BB.nunit" Expanded="true" />
+    <Node UniqueName="[0-1006]C:\Lennie\Work\CSharpBlackberry\CS4BB\CS4BB\bin\Release\CS4BB.exe" Expanded="true" />
+    <Node UniqueName="[0-1007]CS4BB" Expanded="true" />
+    <Node UniqueName="[0-1008]CS4BB.Tests" Expanded="true" />
+    <Node UniqueName="[0-1009]CS4BB.Tests.Core" Expanded="true" />
+    <Node UniqueName="[0-1004]CS4BB.Tests.Core.MainMethodCompTest" Expanded="true" />
+    <Node UniqueName="[0-1001]CS4BB.Tests.Core.UsingCompDirectiveTest" Expanded="true" />
+  </Nodes>
+</VisualState>

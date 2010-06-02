@@ -17,26 +17,26 @@ namespace CS4BB.lang
             return result;
         }
 
-        public CompileLineResult Compile(SourceCode aSourceCode, string aCurrentCodeLine, int aLinePosition)
+        public TargetCodeResult Compile(SourceCode aSourceCode, string aCurrentCodeLine, int aLinePosition)
         {
-            CompileLineResult result = new CompileLineResult(aCurrentCodeLine);
+            TargetCodeResult result = new TargetCodeResult(aCurrentCodeLine);
             
             if (!aSourceCode.ContainProgramArgument("-nopackage"))
             {
-                String namespaceName = GetNamespaceName(aCurrentCodeLine);
+                String namespaceName = GetNamespaceName(aSourceCode, aCurrentCodeLine);
                 StringBuilder newLine = new StringBuilder();
                 newLine.Append("package ").Append(namespaceName).Append(";");
-                result = new CompileLineResult(newLine.ToString());
+                result = new TargetCodeResult(newLine.ToString());
             }
             else
-                result = new CompileLineResult("");
+                result = new TargetCodeResult("");
 
             return result;
         }
 
-        private string GetNamespaceName(string aCurrentCodeLine)
+        private string GetNamespaceName(SourceCode aSourceCode, string aCurrentCodeLine)
         {
-            return aCurrentCodeLine.Replace("namespace", "").Replace(";", "").Trim();
+            return aSourceCode.ReplaceKeyword(aCurrentCodeLine, "namespace", "").Replace(";", "").Trim();
         }
     }
 }

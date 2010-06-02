@@ -18,15 +18,15 @@ namespace CS4BB.lang
             return result;
         }
 
-        public CompileLineResult Compile(SourceCode aSourceCode, string aCurrentCodeLine, int aLinePosition)
+        public TargetCodeResult Compile(SourceCode aSourceCode, string aCurrentCodeLine, int aLinePosition)
         {
-            CompileLineResult result = new CompileLineResult(aCurrentCodeLine);
-            String usingNamespace = GetUsingNamespace(aCurrentCodeLine);
+            TargetCodeResult result = new TargetCodeResult(aCurrentCodeLine);
+            String usingNamespace = GetUsingNamespace(aSourceCode, aCurrentCodeLine);
 
             bool correctLine = IsUsingCorrect(usingNamespace);
 
             if (!correctLine && (IsSystemNamespace(usingNamespace) || IsProgramNamespace(aSourceCode, usingNamespace)))
-                return new CompileLineResult("");
+                return new TargetCodeResult("");
             
             if (correctLine)
             {
@@ -34,7 +34,7 @@ namespace CS4BB.lang
                 // Suggest that we do change this in the future if required
                 StringBuilder newLine = new StringBuilder();
                 newLine.Append("import ").Append(usingNamespace).Append(".*;"); 
-                result = new CompileLineResult(newLine.ToString());
+                result = new TargetCodeResult(newLine.ToString());
             }
             else
             {
@@ -42,7 +42,7 @@ namespace CS4BB.lang
                 newLine.Append("//");
                 newLine.Append(aCurrentCodeLine);
                 newLine.Append("  // Not supported yet");
-                result = new CompileLineResult(newLine.ToString());
+                result = new TargetCodeResult(newLine.ToString());
                 result.LogError(aSourceCode.GetFileName() + ": Using directive not supported yet on line: " + aLinePosition);
             }
             return result;
@@ -60,7 +60,7 @@ namespace CS4BB.lang
         private bool IsProgramNamespace(SourceCode aSourceCode, string aUsingNamespace)
         {
             var found = (from code in aSourceCode.GetLines()
-                         where code.StartsWith("namespace") && code.IndexOf(aUsingNamespace) > -1
+                         where code.StartsWith("namespace") && aSourceCode.ContainKeyword(code, aUsingNamespace) 
                          select code).FirstOrDefault();
             
             return found != null;
@@ -92,10 +92,10 @@ namespace CS4BB.lang
             return result;
         }
 
-        private static String GetUsingNamespace(string aCurrentCodeLine)
+        private static String GetUsingNamespace(SourceCode aSourceCode, string aCurrentCodeLine)
         {
             String usingNamespace = aCurrentCodeLine;
-            usingNamespace = usingNamespace.Replace("using", "").Trim();
+            usingNamespace = aSourceCode.ReplaceKeyword(usingNamespace, "using", "").Trim();
             usingNamespace = usingNamespace.Replace(";", "").Trim();
             return usingNamespace;
         }

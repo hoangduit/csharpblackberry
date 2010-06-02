@@ -23,15 +23,15 @@ namespace CS4BB.lang
                  aCurrentCodeLine.StartsWith("sealed") ||
                  aCurrentCodeLine.StartsWith("internal") ||
                  aCurrentCodeLine.StartsWith("iternal protected")) &&
-                aCurrentCodeLine.IndexOf("class") > -1 &&
+                aSourceCode.ContainKeyword(aCurrentCodeLine, "class")  &&
                 (aCurrentCodeLine.EndsWith("{") || aSourceCode.GetNextLine(aLinePosition).StartsWith("{")))
                 result = true;
             return result;
         }
 
-        public CompileLineResult Compile(SourceCode aSourceCode, string aCurrentCodeLine, int aLinePosition)
+        public TargetCodeResult Compile(SourceCode aSourceCode, string aCurrentCodeLine, int aLinePosition)
         {
-            CompileLineResult result = new CompileLineResult(aCurrentCodeLine);
+            TargetCodeResult result = new TargetCodeResult(aCurrentCodeLine);
 
             String superClassName = GetSupperClassName(aCurrentCodeLine);
             if (superClassName != null)
@@ -50,7 +50,7 @@ namespace CS4BB.lang
                 else
                     newLine.Append(" extends ").Append(superClassName);
 
-                result = new CompileLineResult(newLine.ToString());
+                result = new TargetCodeResult(newLine.ToString());
             }
             return result;
         }
