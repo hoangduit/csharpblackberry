@@ -36,7 +36,7 @@ namespace CS4BB.lang
 
         private string GetNamespaceName(SourceCode aSourceCode, string aCurrentCodeLine)
         {
-            return aSourceCode.ReplaceKeyword(aCurrentCodeLine, "namespace", "").Replace(";", "").Trim();
+            return aSourceCode.ReplaceKeyword(aCurrentCodeLine, "namespace", "").Replace(";", "").Replace("{", "").Trim();
         }
     }
 }

@@ -48,8 +48,12 @@ namespace CS4BB.lang
                 if (superClassName.IndexOf(",") > -1)
                     newLine.Append(" extends ").Append(GetExtendClass(superClassName)).Append(GetInterfaces(superClassName));
                 else
-                    newLine.Append(" extends ").Append(superClassName);
-
+                {
+                    if (!superClassName.StartsWith("I"))
+                        newLine.Append(" extends ").Append(superClassName);
+                    else
+                        newLine.Append(" implements ").Append(superClassName);
+                }
                 result = new TargetCodeResult(newLine.ToString());
             }
             return result;
@@ -100,7 +104,7 @@ namespace CS4BB.lang
         {
             String result = null;
             String[] st = aCurrentCodeLine.Split(':');
-            if (st.Length > 0)
+            if (st.Length > 1)
                 result = st[1].Trim();
             
             return result;
