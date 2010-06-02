@@ -8,4 +8,24 @@
     <CSharp>base.</CSharp>
     <Java>super.</Java>
   </keyword>
+  <keyword>
+    <CSharp>bool</CSharp>
+    <Java>boolean</Java>
+  </keyword>
+  <keyword>
+    <CSharp>operator</CSharp>
+    <Java></Java>
+  </keyword>
+  <keyword>
+    <CSharp>string</CSharp>
+    <Java>String</Java>
+  </keyword>
+  <keyword>
+    <CSharp>internal protected</CSharp>
+    <Java>protected</Java>
+  </keyword>
+  <keyword>
+    <CSharp>internal</CSharp>
+    <Java>protected</Java>
+  </keyword>
 </Keywords>

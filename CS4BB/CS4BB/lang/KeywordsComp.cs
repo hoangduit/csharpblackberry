@@ -13,12 +13,15 @@ namespace CS4BB.lang
         {
             bool result = false;
 
-            var found = (from k in GetKeyworksToConvert()
-                         where aCurrentCodeLine.IndexOf(k.CSharp) > -1
-                         select k).FirstOrDefault();
-            if (found != null)
-                result = true;
+            if (!MainMethodComp.IdentifyMainMethod(aSourceCode, aCurrentCodeLine, aLinePosition))
+            {
 
+                var found = (from k in GetKeyworksToConvert()
+                            where aCurrentCodeLine.IndexOf(k.CSharp) > -1
+                            select k).FirstOrDefault();
+                if (found != null)
+                    result = true;
+            }
             return result;
         }
 

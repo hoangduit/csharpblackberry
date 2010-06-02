@@ -21,14 +21,14 @@ namespace CS4BB.lang
         {
             TargetCodeResult result = new TargetCodeResult(aCurrentCodeLine);
             
-            if (!aSourceCode.ContainProgramArgument("-nopackage"))
-            {
-                String namespaceName = GetNamespaceName(aSourceCode, aCurrentCodeLine);
-                StringBuilder newLine = new StringBuilder();
-                newLine.Append("package ").Append(namespaceName).Append(";");
-                result = new TargetCodeResult(newLine.ToString());
-            }
-            else
+            //if (!aSourceCode.ContainProgramArgument("-nopackage"))
+            //{
+            //    String namespaceName = GetNamespaceName(aSourceCode, aCurrentCodeLine);
+            //    StringBuilder newLine = new StringBuilder();
+            //    newLine.Append("package ").Append(namespaceName).Append(";");
+            //    result = new TargetCodeResult(newLine.ToString());
+            //}
+            //else
                 result = new TargetCodeResult("");
 
             return result;
