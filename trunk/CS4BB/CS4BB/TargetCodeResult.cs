@@ -46,7 +46,7 @@ namespace CS4BB
         public string GetCurrentCode()
         {
             String result = this.CurrentCode;
-            if (result.CompareTo("<br>") == 0)
+            if (result.CompareTo("\n") == 0)
                 result = "";
             return result;
         }

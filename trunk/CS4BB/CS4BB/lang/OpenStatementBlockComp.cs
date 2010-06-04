@@ -19,7 +19,7 @@ namespace CS4BB.lang
 
         public TargetCodeResult Compile(SourceCode aSourceCode, string aCurrentCodeLine, int aLinePosition)
         {
-            return new TargetCodeResult("<br>");
+            return new TargetCodeResult("\n");
         }
     }
 }
