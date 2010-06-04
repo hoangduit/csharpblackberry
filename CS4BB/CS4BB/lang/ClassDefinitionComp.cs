@@ -36,13 +36,13 @@ namespace CS4BB.lang
             String superClassName = GetSupperClassName(aCurrentCodeLine);
             if (superClassName != null)
             {
-               
+
                 String classDef = GetClassDefinition(aCurrentCodeLine);
 
                 StringBuilder newLine = new StringBuilder();
                 if (classDef.StartsWith("class"))
                     newLine.Append("public ");
-                
+
                 newLine.Append(classDef);
 
                 if (superClassName.IndexOf(",") > -1)
@@ -56,6 +56,7 @@ namespace CS4BB.lang
                 }
                 result = new TargetCodeResult(newLine.ToString());
             }
+
             return result;
         }
 

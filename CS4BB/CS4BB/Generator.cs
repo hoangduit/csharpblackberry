@@ -94,6 +94,7 @@ namespace CS4BB
                 ICommand methodDef = new MethodDefinitionComp();
                 ICommand closeStatementBlock = new CloseStatementBlockComp();
                 ICommand keywords = new KeywordsComp();
+                ICommand autoProperty = new AutoPropertiesComp();
 
                 if (usingDirective.Identify(this.sourceCode, currentSourceCodeLine, pos))
                     targetCode = usingDirective.Compile(this.sourceCode, currentSourceCodeLine, pos);
@@ -118,6 +119,9 @@ namespace CS4BB
 
                 if (keywords.Identify(this.sourceCode, currentSourceCodeLine, pos))
                     targetCode = keywords.Compile(this.sourceCode, currentSourceCodeLine, pos);
+
+                 if (autoProperty.Identify(this.sourceCode, currentSourceCodeLine, pos))
+                    targetCode = autoProperty.Compile(this.sourceCode, currentSourceCodeLine, pos);
 
                 // TODO: Add additional commands here
 
@@ -173,7 +177,14 @@ namespace CS4BB
             {
                 String javaFile = this.directoryName + @"/" + this.sourceCode.GetJavaDestinationFileName();
                 file = new StreamWriter(javaFile, true);
-                file.WriteLine(currentLineResult.GetCurrentCode());
+                String[] breakUpLines = currentLineResult.GetCurrentCode().Split('\n');
+                if (breakUpLines.Length > 1)
+                {
+                    for (int i = 0; i < breakUpLines.Length; i++)
+                        file.WriteLine(breakUpLines[i]);
+                }
+                else
+                    file.WriteLine(currentLineResult.GetCurrentCode());
             }
             catch (Exception ex)
             {

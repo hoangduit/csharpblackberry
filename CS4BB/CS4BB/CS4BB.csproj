@@ -76,6 +76,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="lang\AutoPropertiesComp.cs" />
     <Compile Include="lang\Keywords.cs">
       <DependentUpon>Keywords.xsd</DependentUpon>
     </Compile>
@@ -106,6 +107,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SourceCode.cs" />
+    <Compile Include="Tests\Core\AutoPropertiesCompTest.cs" />
     <Compile Include="Tests\Core\ClassDefinitionCompTest.cs" />
     <Compile Include="Tests\Core\KeywordsCompTest.cs" />
     <Compile Include="Tests\Core\MainMethodCompTest.cs" />
