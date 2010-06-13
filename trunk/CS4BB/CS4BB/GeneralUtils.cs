@@ -2,6 +2,7 @@
 using System.Reflection;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
 
 namespace CS4BB
 {
@@ -35,8 +36,18 @@ namespace CS4BB
             String result = null;
             for (int i = 0; i < aArguments.Length; i++)
             {
-                if (!aArguments[i].Trim().StartsWith("-") && Directory.Exists(aArguments[i].Trim()))
-                    result = aArguments[i].Trim();
+                if (aArguments[i].Trim().StartsWith("-d:"))
+                {
+                    String[] st = aArguments[i].Trim().Split(':');
+                    StringBuilder dir = new StringBuilder();
+                    for (int j = 1; j < st.Length; j++)
+                        dir.Append(st[j]).Append(j == 1 ? ":" : "");
+
+                    if (Directory.Exists(dir.ToString()))
+                        result = dir.ToString();
+
+                    break;
+                }
             }
 
             return result;

@@ -76,6 +76,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CompileCSharpSource.cs" />
     <Compile Include="lang\AutoPropertiesComp.cs" />
     <Compile Include="lang\Keywords.cs">
       <DependentUpon>Keywords.xsd</DependentUpon>

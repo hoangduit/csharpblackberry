@@ -18,11 +18,10 @@ namespace CS4BB
 
             try
             {
-                string[] arguments = Environment.GetCommandLineArgs();
-                if (!debugMode && arguments.Length == 0)
+                if (!debugMode && args.Length == 0)
                     throw new ArgumentException("Pass the directory location to convert all C# files.");
-
-                String directoryName = debugMode ? @"C:\Lennie\Work\CSharpBlackberry\CS4BB\HelloWorldCSDemo" : GeneralUtils.getSourceDirectoryName(arguments);
+                
+                String directoryName = debugMode ? @"C:\Lennie\Work\CSharpBlackberry\CS4BB\HelloWorldCSDemo" : GeneralUtils.getSourceDirectoryName(args);
 
                 if (directoryName == null || !Directory.Exists(directoryName))
                     throw new ArgumentException(String.Format("Directory doesn't exist: {0}", directoryName));
@@ -32,29 +31,33 @@ namespace CS4BB
                 if (sourceFileList == null || sourceFileList.Length == 0)
                     new ArgumentException(String.Format("No C# files found to compile in directory: {0}", directoryName));
 
-                foreach (FileInfo sourceFile in sourceFileList)
+                CompileCSharpSource comp = new CompileCSharpSource(sourceFileList);
+                if (comp.Run())
                 {
-                    SourceCode sourceCode = new SourceCode(sourceFile, arguments);
-                    if (!sourceCode.DoesHaveCode())
-                        throw new ArgumentException(String.Format("There is no C# source code in the file: {0}", sourceFile.Name));
-
-                    if (File.Exists(sourceCode.GetJavaDestinationFullName()))
-                        File.Delete(sourceCode.GetJavaDestinationFullName());
-
-                    Generator gen = new Generator(directoryName, sourceCode, true);
-                    gen.UnitTestMode = true; // just for testing
-                    gen.Run();
-
-                    Console.WriteLine();
-                    if (gen.HasErrors())
+                    Console.WriteLine("Done");
+                    foreach (FileInfo sourceFile in sourceFileList)
                     {
-                        Console.WriteLine("\nPlease resolve the following errors first:\n ");
+                        SourceCode sourceCode = new SourceCode(sourceFile, args);
+                        if (!sourceCode.DoesHaveCode())
+                            throw new ArgumentException(String.Format("There is no C# source code in the file: {0}", sourceFile.Name));
 
-                        foreach (String error in gen.GetErrors())
-                            Console.WriteLine("- {0}", error);
+                        if (File.Exists(sourceCode.GetJavaDestinationFullName()))
+                            File.Delete(sourceCode.GetJavaDestinationFullName());
 
-                        GeneralUtils.WriteErrorFile(directoryName, gen.GetErrors());
+                        Generator gen = new Generator(directoryName, sourceCode, true);
+                        gen.Run();
+
                         Console.WriteLine();
+                        if (gen.HasErrors())
+                        {
+                            Console.WriteLine("\nPlease resolve the following errors first:\n ");
+
+                            foreach (String error in gen.GetErrors())
+                                Console.WriteLine("- {0}", error);
+
+                            GeneralUtils.WriteErrorFile(directoryName, gen.GetErrors());
+                            Console.WriteLine();
+                        }
                     }
                 }
 

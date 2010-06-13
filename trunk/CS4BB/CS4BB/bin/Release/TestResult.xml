@@ -1,48 +1,48 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <!--This file represents the results of running a test suite-->
-<test-results name="C:\Lennie\Work\CSharpBlackberry\CS4BB\CS4BB\bin\Release\CS4BB.nunit" total="15" errors="0" failures="0" not-run="0" inconclusive="0" ignored="0" skipped="0" invalid="0" date="2010-06-05" time="01:02:01">
+<test-results name="C:\Lennie\Work\CSharpBlackberry\CS4BB\CS4BB\bin\Release\CS4BB.nunit" total="15" errors="0" failures="0" not-run="0" inconclusive="0" ignored="0" skipped="0" invalid="0" date="2010-06-13" time="16:32:36">
   <environment nunit-version="2.5.5.10112" clr-version="2.0.50727.4927" os-version="Microsoft Windows NT 6.1.7600.0" platform="Win32NT" cwd="C:\Program Files\NUnit 2.5.5\bin\net-2.0" machine-name="LENNIE-PC" user="Lennie" user-domain="Lennie-PC" />
   <culture-info current-culture="en-ZA" current-uiculture="en-US" />
-  <test-suite type="Project" name="C:\Lennie\Work\CSharpBlackberry\CS4BB\CS4BB\bin\Release\CS4BB.nunit" executed="True" result="Success" success="True" time="1.059" asserts="0">
+  <test-suite type="Project" name="C:\Lennie\Work\CSharpBlackberry\CS4BB\CS4BB\bin\Release\CS4BB.nunit" executed="True" result="Success" success="True" time="2.261" asserts="0">
     <results>
-      <test-suite type="Assembly" name="C:\Lennie\Work\CSharpBlackberry\CS4BB\CS4BB\bin\Release\CS4BB.exe" executed="True" result="Success" success="True" time="1.056" asserts="0">
+      <test-suite type="Assembly" name="C:\Lennie\Work\CSharpBlackberry\CS4BB\CS4BB\bin\Release\CS4BB.exe" executed="True" result="Success" success="True" time="2.230" asserts="0">
         <results>
-          <test-suite type="Namespace" name="CS4BB" executed="True" result="Success" success="True" time="1.056" asserts="0">
+          <test-suite type="Namespace" name="CS4BB" executed="True" result="Success" success="True" time="2.225" asserts="0">
             <results>
-              <test-suite type="Namespace" name="Tests" executed="True" result="Success" success="True" time="1.056" asserts="0">
+              <test-suite type="Namespace" name="Tests" executed="True" result="Success" success="True" time="2.222" asserts="0">
                 <results>
-                  <test-suite type="Namespace" name="Core" executed="True" result="Success" success="True" time="1.056" asserts="0">
+                  <test-suite type="Namespace" name="Core" executed="True" result="Success" success="True" time="2.221" asserts="0">
                     <results>
-                      <test-suite type="TestFixture" name="AutoPropertiesCompTest" executed="True" result="Success" success="True" time="0.482" asserts="0">
+                      <test-suite type="TestFixture" name="AutoPropertiesCompTest" executed="True" result="Success" success="True" time="1.031" asserts="0">
                         <results>
-                          <test-case name="CS4BB.Tests.Core.AutoPropertiesCompTest.Compile" executed="True" result="Success" success="True" time="0.477" asserts="2" />
+                          <test-case name="CS4BB.Tests.Core.AutoPropertiesCompTest.Compile" executed="True" result="Success" success="True" time="1.024" asserts="2" />
                         </results>
                       </test-suite>
-                      <test-suite type="TestFixture" name="ClassDefinitionCompTest" executed="True" result="Success" success="True" time="0.019" asserts="0">
+                      <test-suite type="TestFixture" name="ClassDefinitionCompTest" executed="True" result="Success" success="True" time="0.024" asserts="0">
                         <results>
-                          <test-case name="CS4BB.Tests.Core.ClassDefinitionCompTest.AddDefaultModifier" executed="True" result="Success" success="True" time="0.002" asserts="2" />
-                          <test-case name="CS4BB.Tests.Core.ClassDefinitionCompTest.ClassWithOneSuperClass" executed="True" result="Success" success="True" time="0.005" asserts="2" />
+                          <test-case name="CS4BB.Tests.Core.ClassDefinitionCompTest.AddDefaultModifier" executed="True" result="Success" success="True" time="0.003" asserts="2" />
+                          <test-case name="CS4BB.Tests.Core.ClassDefinitionCompTest.ClassWithOneSuperClass" executed="True" result="Success" success="True" time="0.001" asserts="2" />
                           <test-case name="CS4BB.Tests.Core.ClassDefinitionCompTest.ImplementInterfaceAndClass" executed="True" result="Success" success="True" time="0.002" asserts="2" />
-                          <test-case name="CS4BB.Tests.Core.ClassDefinitionCompTest.ImplementOnlyAnInterface" executed="True" result="Success" success="True" time="0.001" asserts="2" />
-                          <test-case name="CS4BB.Tests.Core.ClassDefinitionCompTest.NormalClass" executed="True" result="Success" success="True" time="0.001" asserts="2" />
+                          <test-case name="CS4BB.Tests.Core.ClassDefinitionCompTest.ImplementOnlyAnInterface" executed="True" result="Success" success="True" time="0.008" asserts="2" />
+                          <test-case name="CS4BB.Tests.Core.ClassDefinitionCompTest.NormalClass" executed="True" result="Success" success="True" time="0.002" asserts="2" />
                         </results>
                       </test-suite>
-                      <test-suite type="TestFixture" name="KeywordsCompTest" executed="True" result="Success" success="True" time="0.004" asserts="0">
+                      <test-suite type="TestFixture" name="KeywordsCompTest" executed="True" result="Success" success="True" time="0.005" asserts="0">
                         <results>
                           <test-case name="CS4BB.Tests.Core.KeywordsCompTest.ConvertBase" executed="True" result="Success" success="True" time="0.002" asserts="2" />
                           <test-case name="CS4BB.Tests.Core.KeywordsCompTest.RemoveKeyword" executed="True" result="Success" success="True" time="0.001" asserts="2" />
                         </results>
                       </test-suite>
-                      <test-suite type="TestFixture" name="MainMethodCompTest" executed="True" result="Success" success="True" time="0.001" asserts="0">
+                      <test-suite type="TestFixture" name="MainMethodCompTest" executed="True" result="Success" success="True" time="0.003" asserts="0">
                         <results>
-                          <test-case name="CS4BB.Tests.Core.MainMethodCompTest.Compile" executed="True" result="Success" success="True" time="0.001" asserts="2" />
+                          <test-case name="CS4BB.Tests.Core.MainMethodCompTest.Compile" executed="True" result="Success" success="True" time="0.003" asserts="2" />
                         </results>
                       </test-suite>
-                      <test-suite type="TestFixture" name="MethodDefinitionCompTest" executed="True" result="Success" success="True" time="0.009" asserts="0">
+                      <test-suite type="TestFixture" name="MethodDefinitionCompTest" executed="True" result="Success" success="True" time="0.011" asserts="0">
                         <results>
-                          <test-case name="CS4BB.Tests.Core.MethodDefinitionCompTest.IdentifyOne" executed="True" result="Success" success="True" time="0.002" asserts="2" />
+                          <test-case name="CS4BB.Tests.Core.MethodDefinitionCompTest.IdentifyOne" executed="True" result="Success" success="True" time="0.001" asserts="2" />
                           <test-case name="CS4BB.Tests.Core.MethodDefinitionCompTest.IdentifyThree" executed="True" result="Success" success="True" time="0.004" asserts="2" />
-                          <test-case name="CS4BB.Tests.Core.MethodDefinitionCompTest.IdentifyTwo" executed="True" result="Success" success="True" time="0.001" asserts="2" />
+                          <test-case name="CS4BB.Tests.Core.MethodDefinitionCompTest.IdentifyTwo" executed="True" result="Success" success="True" time="0.000" asserts="2" />
                         </results>
                       </test-suite>
                       <test-suite type="TestFixture" name="NamespaceCompDirectiveTest" executed="True" result="Success" success="True" time="0.002" asserts="0">
@@ -50,10 +50,10 @@
                           <test-case name="CS4BB.Tests.Core.NamespaceCompDirectiveTest.Compile" executed="True" result="Success" success="True" time="0.002" asserts="2" />
                         </results>
                       </test-suite>
-                      <test-suite type="TestFixture" name="UsingCompDirectiveTest" executed="True" result="Success" success="True" time="0.525" asserts="0">
+                      <test-suite type="TestFixture" name="UsingCompDirectiveTest" executed="True" result="Success" success="True" time="1.121" asserts="0">
                         <results>
-                          <test-case name="CS4BB.Tests.Core.UsingCompDirectiveTest.Compile" executed="True" result="Success" success="True" time="0.522" asserts="2" />
-                          <test-case name="CS4BB.Tests.Core.UsingCompDirectiveTest.NotSupportedYet" executed="True" result="Success" success="True" time="0.003" asserts="2" />
+                          <test-case name="CS4BB.Tests.Core.UsingCompDirectiveTest.Compile" executed="True" result="Success" success="True" time="1.114" asserts="2" />
+                          <test-case name="CS4BB.Tests.Core.UsingCompDirectiveTest.NotSupportedYet" executed="True" result="Success" success="True" time="0.004" asserts="2" />
                         </results>
                       </test-suite>
                     </results>

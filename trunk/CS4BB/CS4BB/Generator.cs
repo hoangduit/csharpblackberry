@@ -99,29 +99,29 @@ namespace CS4BB
                 if (usingDirective.Identify(this.sourceCode, currentSourceCodeLine, pos))
                     targetCode = usingDirective.Compile(this.sourceCode, currentSourceCodeLine, pos);
 
-                if (namespaceComp.Identify(this.sourceCode, currentSourceCodeLine, pos))
-                    targetCode = namespaceComp.Compile(this.sourceCode, currentSourceCodeLine, pos);
+                if (namespaceComp.Identify(this.sourceCode, targetCode.GetCurrentCode(), pos))
+                    targetCode = namespaceComp.Compile(this.sourceCode, targetCode.GetCurrentCode(), pos);
 
-                if (classDef.Identify(this.sourceCode, currentSourceCodeLine, pos))
-                    targetCode = classDef.Compile(this.sourceCode, currentSourceCodeLine, pos);
+                if (classDef.Identify(this.sourceCode, targetCode.GetCurrentCode(), pos))
+                    targetCode = classDef.Compile(this.sourceCode, targetCode.GetCurrentCode(), pos);
 
-                if (openStatementBlock.Identify(this.sourceCode, currentSourceCodeLine, pos))
-                    targetCode = openStatementBlock.Compile(this.sourceCode, currentSourceCodeLine, pos);
+                if (openStatementBlock.Identify(this.sourceCode, targetCode.GetCurrentCode(), pos))
+                    targetCode = openStatementBlock.Compile(this.sourceCode, targetCode.GetCurrentCode(), pos);
 
-                if (mainMethod.Identify(this.sourceCode, currentSourceCodeLine, pos))
-                    targetCode = mainMethod.Compile(this.sourceCode, currentSourceCodeLine, pos);
+                if (mainMethod.Identify(this.sourceCode, targetCode.GetCurrentCode(), pos))
+                    targetCode = mainMethod.Compile(this.sourceCode, targetCode.GetCurrentCode(), pos);
 
-                if (methodDef.Identify(this.sourceCode, currentSourceCodeLine, pos))
-                    targetCode = methodDef.Compile(this.sourceCode, currentSourceCodeLine, pos);
+                if (methodDef.Identify(this.sourceCode, targetCode.GetCurrentCode(), pos))
+                    targetCode = methodDef.Compile(this.sourceCode, targetCode.GetCurrentCode(), pos);
 
-                if (closeStatementBlock.Identify(this.sourceCode, currentSourceCodeLine, pos))
-                    targetCode = closeStatementBlock.Compile(this.sourceCode, currentSourceCodeLine, pos);
+                if (closeStatementBlock.Identify(this.sourceCode, targetCode.GetCurrentCode(), pos))
+                    targetCode = closeStatementBlock.Compile(this.sourceCode, targetCode.GetCurrentCode(), pos);
 
-                if (keywords.Identify(this.sourceCode, currentSourceCodeLine, pos))
-                    targetCode = keywords.Compile(this.sourceCode, currentSourceCodeLine, pos);
+                if (keywords.Identify(this.sourceCode, targetCode.GetCurrentCode(), pos))
+                    targetCode = keywords.Compile(this.sourceCode, targetCode.GetCurrentCode(), pos);
 
-                 if (autoProperty.Identify(this.sourceCode, currentSourceCodeLine, pos))
-                    targetCode = autoProperty.Compile(this.sourceCode, currentSourceCodeLine, pos);
+                if (autoProperty.Identify(this.sourceCode, targetCode.GetCurrentCode(), pos))
+                    targetCode = autoProperty.Compile(this.sourceCode, targetCode.GetCurrentCode(), pos);
 
                 // TODO: Add additional commands here
 

@@ -11,7 +11,7 @@ public HelloWorldCSDemo()
 HelloWorldMainScreen mainScreen = new HelloWorldMainScreen();
 super.pushScreen(mainScreen);
 }
-public static void main(String[] args) throws Exception
+public static void main(String[] args)
 {
 HelloWorldCSDemo app = new HelloWorldCSDemo();
 app.enterEventDispatcher();

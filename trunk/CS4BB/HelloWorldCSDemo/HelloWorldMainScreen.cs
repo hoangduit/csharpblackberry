@@ -9,12 +9,12 @@ namespace HelloWorldCSDemo
         public HelloWorldMainScreen()
         {
             // Set the displayed title of the screen       
-            base.setTitle(getAppTitle());
+            base.setTitle(new TextResolver().GetAppTitle());
 
             // Add a read only text field (RichTextField) to the screen.  The
             // RichTextField is focusable by default. Here we provide a style
             // parameter to make the field non-focusable.
-            base.add(new RichTextField("Hello World!", Field.NON_FOCUSABLE));
+            base.add(new RichTextField(new TextResolver().GetHelloWorld(), Field.NON_FOCUSABLE));
         }
 
         /***
@@ -24,17 +24,30 @@ namespace HelloWorldCSDemo
         public override void close()
         {
             // Display a farewell message before closing the application
-            Dialog.alert("Goodbye!");
+            Dialog.alert(new TextResolver().GetGoodBye());
             base.close();
         }
+    }
 
+    internal class TextResolver
+    {
         /// <summary>
         /// Return the application title
         /// </summary>
         /// <returns></returns>
-        internal string getAppTitle()
+        internal string GetAppTitle()
         {
             return "Hello World Demo";
+        }
+
+        internal string GetHelloWorld()
+        {
+            return "Hello C#!";
+        }
+
+        internal string GetGoodBye()
+        {
+            return "Goodbye! Hope you'll use C# for Blackberry again";
         }
     }
 }

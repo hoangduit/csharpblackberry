@@ -42,7 +42,7 @@ namespace CS4BB.lang
             StringBuilder newLine = new StringBuilder();
 
             newLine.Append(line);
-            if (aSourceCode.ContainProgramArgument("-throwexceptions"))
+            if (aSourceCode.ContainProgramArgument("throwexceptions"))
             newLine.Append(" throws Exception");
             
             return new TargetCodeResult(newLine.ToString());
