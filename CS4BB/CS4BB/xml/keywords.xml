@@ -25,6 +25,14 @@
     <Java>protected</Java>
   </keyword>
   <keyword>
+    <CSharp>internal class</CSharp>
+    <Java>class</Java>
+  </keyword>
+  <keyword>
+    <CSharp>protected class</CSharp>
+    <Java>class</Java>
+  </keyword>
+  <keyword>
     <CSharp>internal</CSharp>
     <Java>protected</Java>
   </keyword>

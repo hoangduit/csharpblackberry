@@ -10,8 +10,8 @@ namespace CS4BB
     {
         private FileInfo sourceFile;
         private List<String> sourceCode = new List<String>();
-        private string[] arguments;
-        
+        private Dictionary<string, string> arguments;
+
         /// <summary>
         /// Create a new source code from C# file
         /// </summary>
@@ -20,7 +20,7 @@ namespace CS4BB
         public SourceCode(FileInfo aSourceFile, string[] aArguments)
         {
             this.sourceFile = aSourceFile;
-            this.arguments = aArguments;
+            this.arguments = ResolveArguments(aArguments);
             ReadSourceCode();
         }
 
@@ -35,6 +35,36 @@ namespace CS4BB
                 if (ContainCode(code))
                     sourceCode.Add(GetCode(code));
             }
+        }
+
+        private Dictionary<string, string> ResolveArguments(string[] aArguments)
+        {
+            if (this.arguments == null)
+            {
+                this.arguments = new Dictionary<string, string>();
+                for (int i = 0; i < aArguments.Length; i++)
+                {
+                    if (aArguments[i].StartsWith("-"))
+                    {
+                        if (aArguments[i].Trim().IndexOf(":") == -1)
+                        {
+                            String dictKey = aArguments[i].Trim().Remove(0, 1);
+                            this.arguments.Add(dictKey, "");
+                        }
+                        else
+                        {
+                            String[] st = aArguments[i].Trim().Split(':');
+                            String dictKey = st[0].Trim().Remove(0, 1);
+                            StringBuilder val = new StringBuilder();
+                            for (int j = 1; j < st.Length; j++)
+                                val.Append(st[j]);
+
+                            this.arguments.Add(dictKey, val.ToString());
+                        }
+                    }
+                }
+            }
+            return this.arguments;
         }
 
         /// <summary>
@@ -52,7 +82,21 @@ namespace CS4BB
         /// <returns></returns>
         public string GetJavaDestinationFileName()
         {
-            return this.sourceFile.Name.Replace(".cs", ".java");
+            StringBuilder result = new StringBuilder();
+            if (this.sourceFile.Name.CompareTo("Program.cs") == 0 && ContainProgramArgument("mainclass"))
+            {
+                String mainClassVal = GetProgramArgumentValue("mainclass");
+                if (mainClassVal.Length >= 5 && mainClassVal.Length <= 20)
+                {
+                    result.Append(mainClassVal);
+                    if (!mainClassVal.EndsWith(".java"))
+                        result.Append(".java");
+                }
+            }
+            else
+                result.Append(this.sourceFile.Name.Replace(".cs", ".java"));
+            
+            return result.ToString();
         }
 
         /// <summary>
@@ -61,7 +105,16 @@ namespace CS4BB
         /// <returns></returns>
         public string GetJavaDestinationFullName()
         {
-            return this.sourceFile.FullName.Replace(".cs", ".java");
+            StringBuilder result = new StringBuilder();
+            
+            result.Append(this.sourceFile.DirectoryName);
+            
+            if (!this.sourceFile.DirectoryName.EndsWith(@"\"))
+                result.Append(@"\");
+
+            result.Append(GetJavaDestinationFileName()); 
+            
+            return result.ToString();
         }
 
         /// <summary>
@@ -154,13 +207,8 @@ namespace CS4BB
             bool result = false;
 
             if (arguments != null && !String.IsNullOrEmpty(aSeachArgument))
-            {
-                var found = (from f in arguments
-                            where f.Trim().CompareTo(aSeachArgument) == 0
-                            select f).FirstOrDefault();
-                
-                result = found != null;
-            }
+                result = this.arguments.ContainsKey(aSeachArgument);
+            
             return result;
         }
 
@@ -274,6 +322,20 @@ namespace CS4BB
                 result.Append(aCode);
 
             return result.ToString();
+        }
+
+        /// <summary>
+        /// Get the program parameter value
+        /// </summary>
+        /// <param name="aSearchKey"></param>
+        /// <returns></returns>
+        public String GetProgramArgumentValue(string aSearchKey)
+        {
+            String result = "";
+            if (this.arguments != null && this.arguments.ContainsKey(aSearchKey))
+                this.arguments.TryGetValue(aSearchKey, out result);
+
+            return result;
         }
     }
 }

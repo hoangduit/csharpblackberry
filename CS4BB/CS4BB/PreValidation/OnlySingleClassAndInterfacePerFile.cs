@@ -29,10 +29,13 @@ namespace CS4BB.PreValidation
         private int CountClassName(SourceCode aSourceCode)
         {
             int result = 0;
+
+            ClassDefinitionComp classDef = new ClassDefinitionComp();
+
             int pos = 1;
             foreach(String line in aSourceCode.GetLines())
             {
-                if (ClassDefinitionComp.IdentifyClassDefinition(aSourceCode, line, pos))
+                if (classDef.Identify(aSourceCode, line, pos))
                     result++;
                 pos++;
             }
