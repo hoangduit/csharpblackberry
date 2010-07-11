@@ -2,8 +2,6 @@ import net.rim.device.api.ui.container.*;
 import net.rim.device.api.ui.component.*;
 import net.rim.device.api.ui.*;
 
-package com.lennie;
-
 public class HelloWorldMainScreen extends MainScreen
 {
 public HelloWorldMainScreen()

@@ -20,46 +20,22 @@ namespace CS4BB
             {
                 if (!debugMode && args.Length == 0)
                     throw new ArgumentException("Pass the directory location to convert all C# files.");
-                
-                String directoryName = debugMode ? @"C:\Lennie\Work\CSharpBlackberry\CS4BB\HelloWorldCSDemo" : GeneralUtils.getSourceDirectoryName(args);
 
-                if (directoryName == null || !Directory.Exists(directoryName))
-                    throw new ArgumentException(String.Format("Directory doesn't exist: {0}", directoryName));
+                //args = new string[2];
+                //args[1] = "-mainclass:HelloWorldCSDemo";
 
-                DirectoryInfo sourceDirectory = new DirectoryInfo(directoryName);
-                FileInfo[] sourceFileList = sourceDirectory.GetFiles("*.cs");
-                if (sourceFileList == null || sourceFileList.Length == 0)
-                    new ArgumentException(String.Format("No C# files found to compile in directory: {0}", directoryName));
+                String directoryName = GetWorkDirectory(args, debugMode);
+                FileInfo[] sourceFileList = GetSourceFiles(directoryName);
 
-                CompileCSharpSource comp = new CompileCSharpSource(sourceFileList);
+                ProgramArguments arguments = new ProgramArguments(args);
+
+                bool compileSuccessful = false;
+                CSharpCompile comp = new CSharpCompile(sourceFileList);
                 if (comp.Run())
-                {
-                    Console.WriteLine("Done");
-                    foreach (FileInfo sourceFile in sourceFileList)
-                    {
-                        SourceCode sourceCode = new SourceCode(sourceFile, args);
-                        if (!sourceCode.DoesHaveCode())
-                            throw new ArgumentException(String.Format("There is no C# source code in the file: {0}", sourceFile.Name));
+                    compileSuccessful = DoCompile(args, directoryName, sourceFileList, arguments);
 
-                        if (File.Exists(sourceCode.GetJavaDestinationFullName()))
-                            File.Delete(sourceCode.GetJavaDestinationFullName());
-
-                        Generator gen = new Generator(directoryName, sourceCode, true);
-                        gen.Run();
-
-                        Console.WriteLine();
-                        if (gen.HasErrors())
-                        {
-                            Console.WriteLine("\nPlease resolve the following errors first:\n ");
-
-                            foreach (String error in gen.GetErrors())
-                                Console.WriteLine("- {0}", error);
-
-                            GeneralUtils.WriteErrorFile(directoryName, gen.GetErrors());
-                            Console.WriteLine();
-                        }
-                    }
-                }
+                if (compileSuccessful)
+                    new BlackberryCompile(directoryName, arguments).Run();
 
                 if (debugMode)
                 {
@@ -80,6 +56,57 @@ namespace CS4BB
             {
                 Console.WriteLine("Compiler Error: {0}, {1}", ex.Message, ex.StackTrace);
             }
+        }
+
+        private static bool DoCompile(string[] aArgs, String aDirectoryName, FileInfo[] aSourceFileList, ProgramArguments aArguments)
+        {
+            bool result = false;
+            Console.WriteLine("Done");
+            foreach (FileInfo sourceFile in aSourceFileList)
+            {
+                SourceCode sourceCode = new SourceCode(sourceFile, aArguments);
+                if (!sourceCode.DoesHaveCode())
+                    throw new ArgumentException(String.Format("There is no C# source code in the file: {0}", sourceFile.Name));
+
+                if (File.Exists(sourceCode.GetJavaDestinationFullName()))
+                    File.Delete(sourceCode.GetJavaDestinationFullName());
+
+                Generator gen = new Generator(aDirectoryName, sourceCode, true);
+                gen.Run();
+
+                Console.WriteLine();
+                if (gen.HasErrors())
+                {
+                    Console.WriteLine("\nPlease resolve the following errors first:\n ");
+
+                    foreach (String error in gen.GetErrors())
+                        Console.WriteLine("- {0}", error);
+
+                    GeneralUtils.WriteErrorFile(aDirectoryName, gen.GetErrors());
+                    Console.WriteLine();
+                }
+                else
+                    result = true;
+            }
+            return result;
+        }
+
+        private static FileInfo[] GetSourceFiles(String aDirectoryName)
+        {
+            DirectoryInfo sourceDirectory = new DirectoryInfo(aDirectoryName);
+            FileInfo[] sourceFileList = sourceDirectory.GetFiles("*.cs");
+            if (sourceFileList == null || sourceFileList.Length == 0)
+                new ArgumentException(String.Format("No C# files found to compile in directory: {0}", aDirectoryName));
+            return sourceFileList;
+        }
+
+        private static String GetWorkDirectory(string[] aArgs, bool aDebugMode)
+        {
+            String directoryName = aDebugMode ? @"C:\Lennie\Work\CSharpBlackberry\CS4BB\HelloWorldCSDemo" : GeneralUtils.getSourceDirectoryName(aArgs);
+
+            if (directoryName == null || !Directory.Exists(directoryName))
+                throw new ArgumentException(String.Format("Directory doesn't exist: {0}", directoryName));
+            return directoryName;
         }
     }
 }

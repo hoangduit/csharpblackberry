@@ -1,2 +1,0 @@
-- Program.cs: Using directive not supported yet on line: 3
-- Program.cs: Using directive not supported yet on line: 4

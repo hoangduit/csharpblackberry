@@ -10,17 +10,16 @@ namespace CS4BB
     {
         private FileInfo sourceFile;
         private List<String> sourceCode = new List<String>();
-        private Dictionary<string, string> arguments;
+        public ProgramArguments Arguments;
 
         /// <summary>
         /// Create a new source code from C# file
         /// </summary>
         /// <param name="aSourceFile"></param>
-        /// <param name="aArguments"></param>
-        public SourceCode(FileInfo aSourceFile, string[] aArguments)
+        public SourceCode(FileInfo aSourceFiles, ProgramArguments aArguments)
         {
-            this.sourceFile = aSourceFile;
-            this.arguments = ResolveArguments(aArguments);
+            this.sourceFile = aSourceFiles;
+            this.Arguments = aArguments;
             ReadSourceCode();
         }
 
@@ -35,36 +34,6 @@ namespace CS4BB
                 if (ContainCode(code))
                     sourceCode.Add(GetCode(code));
             }
-        }
-
-        private Dictionary<string, string> ResolveArguments(string[] aArguments)
-        {
-            if (this.arguments == null)
-            {
-                this.arguments = new Dictionary<string, string>();
-                for (int i = 0; i < aArguments.Length; i++)
-                {
-                    if (aArguments[i].StartsWith("-"))
-                    {
-                        if (aArguments[i].Trim().IndexOf(":") == -1)
-                        {
-                            String dictKey = aArguments[i].Trim().Remove(0, 1);
-                            this.arguments.Add(dictKey, "");
-                        }
-                        else
-                        {
-                            String[] st = aArguments[i].Trim().Split(':');
-                            String dictKey = st[0].Trim().Remove(0, 1);
-                            StringBuilder val = new StringBuilder();
-                            for (int j = 1; j < st.Length; j++)
-                                val.Append(st[j]);
-
-                            this.arguments.Add(dictKey, val.ToString());
-                        }
-                    }
-                }
-            }
-            return this.arguments;
         }
 
         /// <summary>
@@ -83,9 +52,9 @@ namespace CS4BB
         public string GetJavaDestinationFileName()
         {
             StringBuilder result = new StringBuilder();
-            if (this.sourceFile.Name.CompareTo("Program.cs") == 0 && ContainProgramArgument("mainclass"))
+            if (this.sourceFile.Name.CompareTo("Program.cs") == 0 && Arguments.ContainProgramArgument("mainclass"))
             {
-                String mainClassVal = GetProgramArgumentValue("mainclass");
+                String mainClassVal = Arguments.GetProgramArgumentValue("mainclass");
                 if (mainClassVal.Length >= 5 && mainClassVal.Length <= 20)
                 {
                     result.Append(mainClassVal);
@@ -194,21 +163,6 @@ namespace CS4BB
             }
 
             result = currentCode;
-            return result;
-        }
-
-        /// <summary>
-        /// Indicate if program contain a given argument
-        /// </summary>
-        /// <param name="aSeachArgument"></param>
-        /// <returns></returns>
-        public bool ContainProgramArgument(string aSeachArgument)
-        {
-            bool result = false;
-
-            if (arguments != null && !String.IsNullOrEmpty(aSeachArgument))
-                result = this.arguments.ContainsKey(aSeachArgument);
-            
             return result;
         }
 
@@ -322,20 +276,6 @@ namespace CS4BB
                 result.Append(aCode);
 
             return result.ToString();
-        }
-
-        /// <summary>
-        /// Get the program parameter value
-        /// </summary>
-        /// <param name="aSearchKey"></param>
-        /// <returns></returns>
-        public String GetProgramArgumentValue(string aSearchKey)
-        {
-            String result = "";
-            if (this.arguments != null && this.arguments.ContainsKey(aSearchKey))
-                this.arguments.TryGetValue(aSearchKey, out result);
-
-            return result;
         }
     }
 }

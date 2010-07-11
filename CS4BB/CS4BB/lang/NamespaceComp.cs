@@ -20,10 +20,10 @@ namespace CS4BB.lang
         public TargetCodeResult Compile(SourceCode aSourceCode, string aCurrentCodeLine, int aLinePosition)
         {
             TargetCodeResult result = new TargetCodeResult(aCurrentCodeLine);
-            
-            if (aSourceCode.ContainProgramArgument("package"))
+
+            if (aSourceCode.Arguments.ContainProgramArgument("package"))
             {
-                String namespaceName = aSourceCode.GetProgramArgumentValue("package");
+                String namespaceName = aSourceCode.Arguments.GetProgramArgumentValue("package");
                 StringBuilder newLine = new StringBuilder();
                 newLine.Append("\npackage ").Append(namespaceName).Append(";");
                 result = new TargetCodeResult(newLine.ToString());
