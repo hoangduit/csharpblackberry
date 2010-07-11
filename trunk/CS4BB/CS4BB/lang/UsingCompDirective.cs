@@ -69,7 +69,7 @@ namespace CS4BB.lang
         private bool IsUsingCorrect(string aUsingNamespace)
         {
             bool result = true;
-            StreamReader str = new StreamReader("xml/usingDirectives.xml");
+            StreamReader str = new StreamReader(System.Configuration.ConfigurationManager.AppSettings["XMLConfigs"] + @"/usingDirectives.xml");
             try
             {
                 XmlSerializer xSerializer = new XmlSerializer(typeof(UsingDirectives));

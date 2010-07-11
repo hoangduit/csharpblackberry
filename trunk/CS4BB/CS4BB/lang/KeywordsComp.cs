@@ -42,7 +42,7 @@ namespace CS4BB.lang
         {
             KeywordsKeyword[] result = null;
 
-            StreamReader str = new StreamReader("xml/Keywords.xml");
+            StreamReader str = new StreamReader(System.Configuration.ConfigurationManager.AppSettings["XMLConfigs"] + @"/Keywords.xml");
             try
             {
                 XmlSerializer xSerializer = new XmlSerializer(typeof(Keywords));

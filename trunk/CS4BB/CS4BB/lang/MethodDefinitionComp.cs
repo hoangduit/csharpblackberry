@@ -42,8 +42,10 @@ namespace CS4BB.lang
             StringBuilder newLine = new StringBuilder();
 
             newLine.Append(line);
-            if (aSourceCode.ContainProgramArgument("throwexceptions"))
-            newLine.Append(" throws Exception");
+            
+            // TODO: We need to b able to indicate exception per method not just for all methods
+            //if (aSourceCode.Arguments.ContainProgramArgument("throwexceptions"))
+            //newLine.Append(" throws Exception");
             
             return new TargetCodeResult(newLine.ToString());
         }
