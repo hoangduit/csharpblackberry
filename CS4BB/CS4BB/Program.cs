@@ -21,9 +21,6 @@ namespace CS4BB
                 if (!debugMode && args.Length == 0)
                     throw new ArgumentException("Pass the directory location to convert all C# files.");
 
-                //args = new string[2];
-                //args[1] = "-mainclass:HelloWorldCSDemo";
-
                 String directoryName = GetWorkDirectory(args, debugMode);
                 FileInfo[] sourceFileList = GetSourceFiles(directoryName);
 
